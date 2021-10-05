@@ -1,0 +1,9 @@
+body {
+    background: #bda7d3;
+}
+
+.todoTable {
+    border-width: 5px 0px 5px 0px;
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+}
