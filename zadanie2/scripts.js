@@ -70,9 +70,10 @@ let updateJSONbin = function() {
 
 
 
+
 let updateTodoList = function() {
 
-    let todoTable = document.getElementById("todoTable");
+    let todoTable = $('#todoTable').get(0);
 
     
     while (todoTable.rows.length != 1){
@@ -90,9 +91,9 @@ let updateTodoList = function() {
     }
 */
     //add all elements
-    let filterInput = document.getElementById("inputSearch");  
-    let startFilterDate = document.getElementById("fromInputDateSearch"); 
-    let endFilterDate = document.getElementById("toInputDateSearch"); 
+    let filterInput = $("#inputSearch").get(0);  
+    let startFilterDate = $("#fromInputDateSearch").get(0); 
+    let endFilterDate = $("#toInputDateSearch").get(0); 
     for (let todo in todoList) {
 
         if (
