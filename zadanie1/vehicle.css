@@ -73,8 +73,8 @@ body {
 .wheelsSettings {
     position: fixed;
     bottom: 11vh;
-    width: 8vw;
-    height: 8vw;
+    width: 13vh;
+    height: 13vh;
     border-radius: 50%;
     background: radial-gradient(
         circle, 
