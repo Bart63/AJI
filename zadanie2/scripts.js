@@ -124,55 +124,35 @@ let updateTodoList = function() {
                     todoListDiv.appendChild(newElement);
                     */
 
-                    let row = document.createElement("tr");
-
-                    row.className = "table-primary";
-                    
-                    let cellTitle = document.createElement("td");
-                    let cellTextTitle = document.createTextNode(todoList[todo].title);
-
-                    cellTitle.appendChild(cellTextTitle);
-                    row.appendChild(cellTitle);
-                    
-                    let cellDescription = document.createElement("td");
-                    let cellTextDescription = document.createTextNode(todoList[todo].description);
-
-                    cellDescription.appendChild(cellTextDescription);
-                    row.appendChild(cellDescription);
-
-                    let cellPlace = document.createElement("td");
-                    let cellTextPlace = document.createTextNode(todoList[todo].place);
-
-                    cellPlace.appendChild(cellTextPlace);
-                    row.appendChild(cellPlace);
-
-                    let cellDueDate = document.createElement("td");
-                    let cellTextDueDate = document.createTextNode(todoList[todo].dueDate);
-
-                    cellDueDate.appendChild(cellTextDueDate);
-                    row.appendChild(cellDueDate);
-
-                    let cellDeleteButton = document.createElement("td");
-
-                    let newDeleteButton = document.createElement("input");
-                    newDeleteButton.type = "button";
-                    newDeleteButton.value = "Delete";
-                    
-                    newDeleteButton.className = "btn btn-outline-danger";
-
-                    newDeleteButton.addEventListener("click",
-                        function() {
-                            deleteTodo(todo);
-                        });
-
-                    
                     
 
-                    cellDeleteButton.appendChild(newDeleteButton);
+                    let row = $('<tr></tr>')
+                    .addClass("table-primary")
+                    .append($('<td></td>')
+                    .append($('<text></text>')
+                    .text(todoList[todo].title)))
+                    .append($('<td></td>')
+                    .append($('<text></text>')
+                    .text(todoList[todo].description)))
+                    .append($('<td></td>')
+                    .append($('<text></text>')
+                    .text(todoList[todo].place)))
+                    .append($('<td></td>')
+                    .append($('<text></text>')
+                    .text(todoList[todo].dueDate)))
+                    .append($('<td></td>')
+                    .append($('<input></input>')
+                    .attr({type: "button", value: "delete"})
+                    .addClass("btn btn-outline-danger")
+                    .on("click",
+                    function() {
+                        deleteTodo(todo);
+                    })
+                    ));
 
-                    row.appendChild(cellDeleteButton);
 
-                    todoTable.appendChild(row);
+                    $("#todoTable")
+                    .append(row);
                 }
           }
     }
@@ -182,10 +162,10 @@ setInterval(updateTodoList, 1000);
 
 let addTodo = function() {
     //get the elements in the form
-      let inputTitle = document.getElementById("inputTitle");
-      let inputDescription = document.getElementById("inputDescription");
-      let inputPlace = document.getElementById("inputPlace");
-      let inputDate = document.getElementById("inputDate");
+      let inputTitle = $("#inputTitle").get(0);
+      let inputDescription = $("#inputDescription").get(0);
+      let inputPlace = $("#inputPlace").get(0);
+      let inputDate = $("#inputDate").get(0);
     //get the values from the form
       let newTitle = inputTitle.value;
       let newDescription = inputDescription.value;
