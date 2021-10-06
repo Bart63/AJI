@@ -90,7 +90,9 @@ let updateTodoList = function() {
     }
 */
     //add all elements
-    let filterInput = document.getElementById("inputSearch");   
+    let filterInput = document.getElementById("inputSearch");  
+    let startFilterDate = document.getElementById("fromInputDateSearch"); 
+    let endFilterDate = document.getElementById("toInputDateSearch"); 
     for (let todo in todoList) {
 
         if (
@@ -98,73 +100,79 @@ let updateTodoList = function() {
             (todoList[todo].title.includes(filterInput.value)) ||
             (todoList[todo].description.includes(filterInput.value))
           ) {
+                if ((!startFilterDate.value && !endFilterDate.value) ||
+                (todoList[todo].dueDate >= startFilterDate.value && !endFilterDate.value) ||
+                (!startFilterDate.value && endFilterDate.value >= todoList[todo].dueDate) ||
+                (todoList[todo].dueDate >= startFilterDate.value && todoList[todo].dueDate <= endFilterDate.value)){
 
-            /*
-                let newDeleteButton = document.createElement("input");
-                newDeleteButton.type = "button";
-                newDeleteButton.value = "x";
-                newDeleteButton.addEventListener("click",
-                    function() {
-                        deleteTodo(todo);
-                    });
+                    
+                /*
+                    let newDeleteButton = document.createElement("input");
+                    newDeleteButton.type = "button";
+                    newDeleteButton.value = "x";
+                    newDeleteButton.addEventListener("click",
+                        function() {
+                            deleteTodo(todo);
+                        });
 
-                let newElement = document.createElement("div");
-                let newContent = document.createTextNode(
-                    todoList[todo].title + " " + todoList[todo].description);
-                newElement.appendChild(newContent);
-                newElement.appendChild(newDeleteButton);
-                todoListDiv.appendChild(newElement);
-                */
+                    let newElement = document.createElement("div");
+                    let newContent = document.createTextNode(
+                        todoList[todo].title + " " + todoList[todo].description);
+                    newElement.appendChild(newContent);
+                    newElement.appendChild(newDeleteButton);
+                    todoListDiv.appendChild(newElement);
+                    */
 
-                let row = document.createElement("tr");
+                    let row = document.createElement("tr");
 
-                row.className = "table-primary";
-                
-                let cellTitle = document.createElement("td");
-                let cellTextTitle = document.createTextNode(todoList[todo].title);
+                    row.className = "table-primary";
+                    
+                    let cellTitle = document.createElement("td");
+                    let cellTextTitle = document.createTextNode(todoList[todo].title);
 
-                cellTitle.appendChild(cellTextTitle);
-                row.appendChild(cellTitle);
-                
-                let cellDescription = document.createElement("td");
-                let cellTextDescription = document.createTextNode(todoList[todo].description);
+                    cellTitle.appendChild(cellTextTitle);
+                    row.appendChild(cellTitle);
+                    
+                    let cellDescription = document.createElement("td");
+                    let cellTextDescription = document.createTextNode(todoList[todo].description);
 
-                cellDescription.appendChild(cellTextDescription);
-                row.appendChild(cellDescription);
+                    cellDescription.appendChild(cellTextDescription);
+                    row.appendChild(cellDescription);
 
-                let cellPlace = document.createElement("td");
-                let cellTextPlace = document.createTextNode(todoList[todo].place);
+                    let cellPlace = document.createElement("td");
+                    let cellTextPlace = document.createTextNode(todoList[todo].place);
 
-                cellPlace.appendChild(cellTextPlace);
-                row.appendChild(cellPlace);
+                    cellPlace.appendChild(cellTextPlace);
+                    row.appendChild(cellPlace);
 
-                let cellDueDate = document.createElement("td");
-                let cellTextDueDate = document.createTextNode(todoList[todo].dueDate);
+                    let cellDueDate = document.createElement("td");
+                    let cellTextDueDate = document.createTextNode(todoList[todo].dueDate);
 
-                cellDueDate.appendChild(cellTextDueDate);
-                row.appendChild(cellDueDate);
+                    cellDueDate.appendChild(cellTextDueDate);
+                    row.appendChild(cellDueDate);
 
-                let cellDeleteButton = document.createElement("td");
+                    let cellDeleteButton = document.createElement("td");
 
-                let newDeleteButton = document.createElement("input");
-                newDeleteButton.type = "button";
-                newDeleteButton.value = "Delete";
-                
-                newDeleteButton.className = "btn btn-outline-danger";
+                    let newDeleteButton = document.createElement("input");
+                    newDeleteButton.type = "button";
+                    newDeleteButton.value = "Delete";
+                    
+                    newDeleteButton.className = "btn btn-outline-danger";
 
-                newDeleteButton.addEventListener("click",
-                    function() {
-                        deleteTodo(todo);
-                    });
+                    newDeleteButton.addEventListener("click",
+                        function() {
+                            deleteTodo(todo);
+                        });
 
-                
-                
+                    
+                    
 
-                cellDeleteButton.appendChild(newDeleteButton);
+                    cellDeleteButton.appendChild(newDeleteButton);
 
-                row.appendChild(cellDeleteButton);
+                    row.appendChild(cellDeleteButton);
 
-                todoTable.appendChild(row);
+                    todoTable.appendChild(row);
+                }
           }
     }
 }
