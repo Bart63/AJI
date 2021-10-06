@@ -4,68 +4,120 @@ body {
 }
 
 .tracks {
-    position: absolute;
-    height: 15px;
+    position: fixed;
+    height: 2vh;
     width: 100%;
-    top: 800px;
+    bottom: 10vh;
     background: black;
 }
 
-.ground {
-    position: absolute;
-    height: 160px;
-    width: 100%;
-    top: 10px;
-    background: linear-gradient(0deg, rgba(77,55,17,1) 2%, rgba(68,57,37,1) 20%, rgba(97,92,92,1) 97%);
-}
-
 .line {
-    position: absolute;
-    height: 5px;
+    position: fixed;
+    height: 0.5vh;
     width: 100%;
-    top: 140px;
+    top: 5vh;
     background: rgb(66, 66, 66);
 }
 
-.wheelsSettings {
+.ground {
+    position: fixed;
+    height: 10vh;
+    width: 100%;
+    bottom: 0vh;
+    background: linear-gradient(
+        0deg, 
+        rgba(77, 55, 17, 1) 2%, 
+        rgba(68, 57, 37, 1) 20%, 
+        rgba(97, 92, 92, 1) 97%
+    );
+}
+
+.electricityCollector1 {
     position: absolute;
-    bottom: 10px;
-    width: 100px;
-    height: 100px;
+    border-top: 14vh solid black;
+    border-right: 14vh solid transparent;
+    border-left: 14vh solid transparent;
+    bottom: 57vh;
+    left: 45vw;
+}
+
+.electricityCollector1::after {
+    position: absolute;
+    content: '';
+    border-top: 12.5vh solid #e1e3ba;
+    border-right: 12.5vh solid transparent;
+    border-left: 12.5vh solid transparent;
+    top: -13.6vh;
+    left: -12.5vh;
+}
+
+.electricityCollector2 {
+    position: absolute;
+    border-bottom: 14vh solid black;
+    border-right: 14vh solid transparent;
+    border-left: 14vh solid transparent;
+    bottom: 71vh;
+    left: 45vw;
+}
+
+.electricityCollector2::after {
+    position: absolute;
+    content: '';
+    border-bottom: 12.5vh solid #e1e3ba;
+    border-right: 12.5vh solid transparent;
+    border-left: 12.5vh solid transparent;
+    top: 0.8vh;
+    left: -12.5vh;
+}
+
+.wheelsSettings {
+    position: fixed;
+    bottom: 11vh;
+    width: 8vw;
+    height: 8vw;
     border-radius: 50%;
-    
-    background: radial-gradient(circle, rgba(103,103,103,1) 22%, rgba(19,19,19,1) 61%, rgba(255,255,255,1) 97%);
+    background: radial-gradient(
+        circle, 
+        rgba(103, 103, 103, 1) 22%, 
+        rgba(19, 19, 19, 1) 61%, 
+        rgba(255, 255, 255, 1) 97%
+    );
 }
 
 .wheel1Pos {
-    left: 405px;
+    left: 20vw;
 }
 
 .wheel2Pos {
-    left: 600px;   
+    left: 35vw;
 }
 
 .wheel3Pos {
-    left: 1165px;
+    right: 20vw;
 }
 
 .wheel4Pos {
-    left: 1355px;   
+    right: 35vw;
 }
 
 .tram {
-    position: absolute;
-    bottom: 85px;
-    left: 280px;
-    width: 1300px;
-    height: 400px;
+    position: fixed;
+    top: 32vh;
+    left: 15vw;
+    width: 70%;
+    height: 45%;
     border-radius: 10%;
-    
-    background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,239,112,1) 5%,
-    rgba(121,9,79,1) 50%, rgba(255,239,112,1) 95%, rgba(255,255,255,1) 100%);
+    background: linear-gradient(
+            90deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 239, 112, 1) 5%, 
+        rgba(121, 9, 79, 1) 50%, 
+        rgba(255, 239, 112, 1) 95%, 
+        rgba(255, 255, 255, 1) 100%
+    );
     border-style: outset;
-    border-bottom-width: 5px;
-    border-top-width: 3px;
+    border-bottom-width: 0.8vh;
+    border-top-width: 0.4vh;
     border-left-width: 0px;
     border-right-width: 0px;
     border-bottom-color: black;
@@ -73,91 +125,43 @@ body {
 }
 
 .windows {
-    position: absolute;
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(183,200,204,1) 0%,
-     rgba(195,240,240,1) 0%, rgba(167,206,215,1) 82%, rgba(161,161,161,1) 100%);
+    position: fixed;
+    background: radial-gradient(
+        circle, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(183, 200, 204, 1) 0%, 
+        rgba(195, 240, 240, 1) 0%, 
+        rgba(167, 206, 215, 1) 82%, 
+        rgba(161, 161, 161, 1) 100%
+    );
     border-color: brown;
     border-style: inset;
-    border-width: 10px;
-    
-    width: 100px;
-    height: 150px;
+    border-width: 1vh;
+    bottom: 40%;
+    width: 5%;
+    height: 18%;
 }
 
 .window1 {
-    left: 100px;
-    bottom: 170px;
+    left: 20%;
 }
 
 .window2 {
-    left: 240px;
-    bottom: 170px;
+    left: 28%;
 }
 
 .window3 {
-    left: 380px;
-    bottom: 170px;
+    left: 36%;
 }
 
 .window4 {
-    left: 800px;
-    bottom: 170px;
+    right: 20%;
 }
 
 .window5 {
-    left: 940px;
-    bottom: 170px;
+    right: 28%;
 }
 
 .window6 {
-    left: 1080px;
-    bottom: 170px;
-}
-
-.electricityCollector1 {
-    width: 0;
-    height: 0;
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid transparent;
-    border-left: 100px solid black;
-    position: absolute;
-    top: -610px;
-    left: 900px;
-    transform: rotate(90deg);
-}
-
-.electricityCollector1::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 90px solid transparent;
-    border-bottom: 90px solid transparent;
-    border-left: 90px solid #e1e3ba;
-    position: absolute;
-    top: -90px;
-    left: -96px;
-}
-
-.electricityCollector2 {
-    width: 0;
-    height: 0;
-    border-top: 100px solid transparent;
-    border-bottom: 100px solid transparent;
-    border-left: 100px solid black;
-    position: absolute;
-    top: -709px;
-    left: 900px;
-    transform: rotate(-90deg);
-}
-
-.electricityCollector2::after {
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 90px solid transparent;
-    border-bottom: 90px solid transparent;
-    border-left: 90px solid #e1e3ba;
-    position: absolute;
-    top: -90px;
-    left: -96px;
+    right: 36%;
 }
