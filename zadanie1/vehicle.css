@@ -1,0 +1,167 @@
+body {
+    background: #e1e3ba;
+    margin: 0px;
+}
+
+.tracks {
+    position: fixed;
+    height: 2vh;
+    width: 100%;
+    bottom: 10vh;
+    background: black;
+}
+
+.line {
+    position: fixed;
+    height: 0.5vh;
+    width: 100%;
+    top: 5vh;
+    background: rgb(66, 66, 66);
+}
+
+.ground {
+    position: fixed;
+    height: 10vh;
+    width: 100%;
+    bottom: 0vh;
+    background: linear-gradient(
+        0deg, 
+        rgba(77, 55, 17, 1) 2%, 
+        rgba(68, 57, 37, 1) 20%, 
+        rgba(97, 92, 92, 1) 97%
+    );
+}
+
+.electricityCollector1 {
+    position: absolute;
+    border-top: 14vh solid black;
+    border-right: 14vh solid transparent;
+    border-left: 14vh solid transparent;
+    bottom: 57vh;
+    left: 45vw;
+}
+
+.electricityCollector1::after {
+    position: absolute;
+    content: '';
+    border-top: 12.5vh solid #e1e3ba;
+    border-right: 12.5vh solid transparent;
+    border-left: 12.5vh solid transparent;
+    top: -13.6vh;
+    left: -12.5vh;
+}
+
+.electricityCollector2 {
+    position: absolute;
+    border-bottom: 14vh solid black;
+    border-right: 14vh solid transparent;
+    border-left: 14vh solid transparent;
+    bottom: 71vh;
+    left: 45vw;
+}
+
+.electricityCollector2::after {
+    position: absolute;
+    content: '';
+    border-bottom: 12.5vh solid #e1e3ba;
+    border-right: 12.5vh solid transparent;
+    border-left: 12.5vh solid transparent;
+    top: 0.8vh;
+    left: -12.5vh;
+}
+
+.wheelsSettings {
+    position: fixed;
+    bottom: 11vh;
+    width: 13vh;
+    height: 13vh;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle, 
+        rgba(103, 103, 103, 1) 22%, 
+        rgba(19, 19, 19, 1) 61%, 
+        rgba(255, 255, 255, 1) 97%
+    );
+}
+
+.wheel1Pos {
+    left: 20vw;
+}
+
+.wheel2Pos {
+    left: 35vw;
+}
+
+.wheel3Pos {
+    right: 20vw;
+}
+
+.wheel4Pos {
+    right: 35vw;
+}
+
+.tram {
+    position: fixed;
+    top: 32vh;
+    left: 15vw;
+    width: 70%;
+    height: 45%;
+    border-radius: 10%;
+    background: linear-gradient(
+            90deg, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(255, 239, 112, 1) 5%, 
+        rgba(121, 9, 79, 1) 50%, 
+        rgba(255, 239, 112, 1) 95%, 
+        rgba(255, 255, 255, 1) 100%
+    );
+    border-style: outset;
+    border-bottom-width: 0.8vh;
+    border-top-width: 0.4vh;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-color: black;
+    border-top-color: rgb(255, 187, 0);
+}
+
+.windows {
+    position: fixed;
+    background: radial-gradient(
+        circle, 
+        rgba(255, 255, 255, 1) 0%, 
+        rgba(183, 200, 204, 1) 0%, 
+        rgba(195, 240, 240, 1) 0%, 
+        rgba(167, 206, 215, 1) 82%, 
+        rgba(161, 161, 161, 1) 100%
+    );
+    border-color: brown;
+    border-style: inset;
+    border-width: 1vh;
+    bottom: 40%;
+    width: 5%;
+    height: 18%;
+}
+
+.window1 {
+    left: 20%;
+}
+
+.window2 {
+    left: 28%;
+}
+
+.window3 {
+    left: 36%;
+}
+
+.window4 {
+    right: 20%;
+}
+
+.window5 {
+    right: 28%;
+}
+
+.window6 {
+    right: 36%;
+}
