@@ -125,7 +125,7 @@ let updateTodoList = function() {
                 .text(todoList[todo].place)))
                 .append($('<td></td>')
                 .append($('<text></text>')
-                .text(todoList[todo].dueDate)))
+                .text(todoList[todo].dueDate.substr(0,10))))
                 .append($('<td></td>')
                 .append($('<input></input>')
                 .attr({type: "button", value: "delete"})
@@ -135,7 +135,7 @@ let updateTodoList = function() {
                     deleteTodo(todo);
                 })
                 ));
-                
+
                 $("#todoTable")
                 .append(row);
             }
@@ -158,7 +158,7 @@ let addTodo = function() {
     let newDate = new Date(inputDate.value);
     //create new item
     let newTodo = {
-        dueDate: newDate,
+        dueDate: newDate.toJSON(),
         place: newPlace,
         description: newDescription,
         title: newTitle
