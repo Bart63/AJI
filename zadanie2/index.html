@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="theme.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="scripts.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>MyTODO App</title>
+ </head>
+ <body>
+    <div class="container">
+        <h1 class="text-center">My Notes</h1>
+        <div id="todoListView"></div>
+        <table id="todoTable" class="table todoTable">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Place</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+        </table>
+        
+        <form>
+            <div class="form-group form">
+                <label class="label lb-md">New note...</label>
+                <div class="form-group">
+                    <input type="text" id="inputTitle" placeholder="Title" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="inputDescription" placeholder="Description" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="inputPlace" placeholder="Place" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <input type="date" id="inputDate" placeholder="Date" class="form-control"/>
+                </div>
+                <div class="form-group text-center">
+                    <input type="button" value="Add" class="btn btn-primary text-center"
+                    onclick="addTodo()"/>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-group">
+            <div class="input-group-text"> 
+                <input type="search" id="inputSearch" placeholder="Type Your seach here..." class="form-control"/> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="input-group-text"> 
+                <label class="label-group-text mr-2">Filter by date from</label>
+                <input type="date" id="fromInputDateSearch" class="input-group-text mr-2"/>
+                <label class="label-group-text mr-2">to</label>
+                <input type="date" id="toInputDateSearch" class="input-group-text"/>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
