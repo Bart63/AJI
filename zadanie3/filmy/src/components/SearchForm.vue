@@ -1,5 +1,5 @@
 <template>
-  <p>Search Forum</p>
+  <h2>Search Forum</h2>
 </template>
 
 <script>

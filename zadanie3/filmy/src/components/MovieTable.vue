@@ -1,5 +1,5 @@
 <template>
-  <p>Movie Table</p>
+  <h2>Movie Table</h2>
 </template>
 
 <script>

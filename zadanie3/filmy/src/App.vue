@@ -1,9 +1,8 @@
 <template>
   <search-form/>
   <movie-table/>
-  <movies-by-genre/>
-  <movies-by-cast/>
-  <p>{{ this.first }}</p>
+  <movies-by-genre :movies="moviesForGenre"/>
+  <movies-by-cast :movies="moviesForCast"/>
 </template>
 
 <script>
@@ -24,12 +23,13 @@ export default {
   data() {
     return {
       movies: moviesData,
-      first: null,
+      moviesForGenre: [],
+      moviesForCast: [],
     };
   },
   created() {
-    this.first = _.first(this.movies)
-    console.log(this.first);
+    this.moviesForGenre = _.sampleSize(this.movies, 100);
+    this.moviesForCast = _.sampleSize(this.movies, 100); 
   },
 };
 </script>
