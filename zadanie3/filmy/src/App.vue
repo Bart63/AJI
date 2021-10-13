@@ -1,5 +1,5 @@
 <template>
-  <p>{{this.movies}}</p>
+  <p>{{ this.first }}</p>
 </template>
 
 <script>
@@ -9,15 +9,16 @@ export default {
   name: "App",
   data() {
     return {
-      movies: moviesData
-    }
+      movies: moviesData,
+      first: null,
+    };
   },
   created() {
-    console.log(this.movies);
-  }
+    this.first = _.first(this.movies)
+    console.log(this.first);
+  },
 };
 </script>
 
 <style>
-
 </style>
