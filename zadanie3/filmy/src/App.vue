@@ -1,6 +1,6 @@
 <template>
-  <search-form/>
-  <movie-table/>
+  <search-form :movies="this.movies" @returnData="getFilteredMovies"></search-form>
+  <movie-table :movies="filteredMovies"></movie-table>
   <movies-by-genre :movies="moviesForGenre"/>
   <movies-by-cast :movies="moviesForCast"/>
 </template>
@@ -23,15 +23,22 @@ export default {
   data() {
     return {
       movies: moviesData,
+      filteredMovies: moviesData,
       moviesForGenre: [],
       moviesForCast: [],
     };
   },
   created() {
-    this.moviesForGenre = _.sampleSize(this.movies, 100);
-    this.moviesForCast = _.sampleSize(this.movies, 100); 
+    this.moviesForGenre = _.sampleSize(moviesData, 100);
+    this.moviesForCast = _.sampleSize(moviesData, 100); 
   },
+  methods: {
+    getFilteredMovies(value) {
+      this.filteredMovies = value;
+    }
+  }
 };
+
 </script>
 
 <style>

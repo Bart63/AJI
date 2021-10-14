@@ -1,4 +1,5 @@
 <template>
+<div>
   <h2>Filmy wg obsady:</h2>
   <p v-for="c in cast">
     {{ c }}:
@@ -8,6 +9,7 @@
         </span>
     </p>
   </p>
+  </div>
 </template>
 
 <script>

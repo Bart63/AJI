@@ -1,4 +1,5 @@
 <template>
+<div>
   <h2>Filmy wg gatunku:</h2>
   <p v-for="gen in genres">
     {{ gen }}:
@@ -8,6 +9,7 @@
         </span>
     </p>
   </p>
+  </div>
 </template>
 
 <script>
