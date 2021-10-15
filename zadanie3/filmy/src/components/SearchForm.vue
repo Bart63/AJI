@@ -18,7 +18,7 @@
           <input id="obsadaText" type="text" placeholder="Imię i nazwisko"/>
       </div>
       <div>
-          <button id="szukajButton" type="button" @click="$emit('returnData', this.films)">Szukaj</button>
+          <button id="szukajButton" type="button" @click="filter, ('returnData', this.films)">Szukaj</button>
       </div>
     </div>
 </template>
@@ -38,7 +38,7 @@ export default {
   },
   created() {
     this.films = this.movies;
-  }
+  },
   
   
 }

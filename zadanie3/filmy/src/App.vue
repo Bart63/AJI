@@ -1,6 +1,6 @@
 <template>
-  <search-form :movies="this.movies" @returnData="getFilteredMovies"></search-form>
-  <movie-table :movies="filteredMovies"></movie-table>
+  <search-form :movies="this.movies" @returnData="getFilteredMovies(value)"></search-form>
+  <movie-table :movies="this.filteredMovies"></movie-table>
   <movies-by-genre :movies="moviesForGenre"/>
   <movies-by-cast :movies="moviesForCast"/>
 </template>

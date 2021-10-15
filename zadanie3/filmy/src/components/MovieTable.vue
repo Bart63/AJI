@@ -11,14 +11,21 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="d in movies">
+            <tr v-for="d in this.moviesTable">
               <td>{{ d.title }}</td>
               <td>{{ d.year }}</td>
-              <td>{{ d.cast }}</td>
-              <td>{{ d.genres }}</td>
+              <td>
+                <p v-for="c in d.cast">{{c}}</p>
+              </td>
+              <td>
+                <p v-for="g in d.genres">{{g}}</p>
+              </td>
             </tr>
           </tbody>
       </table>
+      <div>
+          <button id="kolejneButton" type="button" @click="showNextMovies">Pokaż kolejne 10</button>
+      </div>
       </div>
 </template>
 
@@ -31,13 +38,40 @@ export default {
   },
   data() {
     return {
-      
+      moviesTable: [],
       tableHeaders: [],
+      numberOfRows: Number
     };
+  },
+  created() {
+    this.numberOfRows = 10;
+    this.moviesTable = this.firstN(this.movies, this.numberOfRows);
+    
+  }, 
+  methods: {
+    firstN: function(obj, n) {
+      return Object.keys(obj)
+      .slice(0, n)
+      .reduce(function(memo, current) { 
+      memo[current] = obj[current]
+      return memo;
+    }, {})
+  },
+  showNextMovies: function() {
+    this.numberOfRows = this.numberOfRows + 10;
+    this.moviesTable = this.firstN(this.movies, this.numberOfRows);
+  },
+  forceUpdateFunction: function() {
+    this.$forceUpdate
+  } 
+
   }
  
 };
 </script>
 
 <style scoped>
+th, td {
+  border: 1px solid black;
+}
 </style>
