@@ -61,9 +61,7 @@ export default {
     this.numberOfRows = this.numberOfRows + 10;
     this.moviesTable = this.firstN(this.movies, this.numberOfRows);
   },
-  forceUpdateFunction: function() {
-    this.$forceUpdate
-  } 
+ 
 
   }
  

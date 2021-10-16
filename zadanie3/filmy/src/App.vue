@@ -1,5 +1,5 @@
 <template>
-  <search-form :movies="this.movies" @returnData="getFilteredMovies(value)"></search-form>
+  <search-form :movies="this.movies"></search-form>
   <movie-table :movies="this.filteredMovies"></movie-table>
   <movies-by-genre :movies="moviesForGenre"/>
   <movies-by-cast :movies="moviesForCast"/>
@@ -33,9 +33,7 @@ export default {
     this.moviesForCast = _.sampleSize(moviesData, 100); 
   },
   methods: {
-    getFilteredMovies(value) {
-      this.filteredMovies = value;
-    }
+    
   }
 };
 

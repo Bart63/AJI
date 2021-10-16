@@ -17,9 +17,7 @@
           <text>Obsada:</text>
           <input id="obsadaText" type="text" placeholder="Imię i nazwisko"/>
       </div>
-      <div>
-          <button id="szukajButton" type="button" @click="filter, ('returnData', this.films)">Szukaj</button>
-      </div>
+      <button id="szukajButton" type="button" @click="filter">Szukaj</button>
     </div>
 </template>
 
@@ -32,14 +30,20 @@ export default {
  },
   data() {
     return {
-      films: []
-     
+      films: [],
+      a: Number
     };
   },
   created() {
     this.films = this.movies;
+    this.a = 4;
   },
-  
+  methods: {
+    filter: function()
+    {
+      this.a = this.a + 1;
+    }
+  }
   
 }
 
