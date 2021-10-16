@@ -46,19 +46,25 @@ export default {
   created() {
     this.numberOfRows = 10;
     this.moviesTable = this.firstN(this.movies, this.numberOfRows);
-    
   }, 
   methods: {
     firstN: function(obj, n) {
-      return Object.keys(obj)
-      .slice(0, n)
-      .reduce(function(memo, current) { 
-      memo[current] = obj[current]
-      return memo;
-    }, {})
+      return _.reduce(
+        _.slice(_.keys(obj), 0, n),
+        function (memo, current) {
+          memo[current] = obj[current];
+          return memo;
+        },
+        {}
+      );
   },
   showNextMovies: function() {
     this.numberOfRows = this.numberOfRows + 10;
+
+    if (this.movies.length < this.numberOfRows){
+      this.numberOfRows = this.movies.length;
+    }
+
     this.moviesTable = this.firstN(this.movies, this.numberOfRows);
   },
  

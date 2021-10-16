@@ -7,11 +7,11 @@
       </div>
       <div>
           <text>Rok produkcji od:</text>
-          <input id="rokOdDate" type="date"/>
+          <input id="rokOdDate" type="number" min="1900" max="2019" step="1" value="" />
       </div>
       <div>
           <text>Rok produkcji do:</text>
-          <input id="rokDoDate" type="date"/>
+          <input id="rokDoDate" type="number" min="1900" max="2019" step="1" value="" />
       </div>
       <div>
           <text>Obsada:</text>
@@ -31,19 +31,53 @@ export default {
   data() {
     return {
       films: [],
-      a: Number
+      
     };
   },
   created() {
     this.films = this.movies;
-    this.a = 4;
+    
   },
   methods: {
     filter: function()
     {
-      this.a = this.a + 1;
+
+      this.films = this.movies;
+
+      var titleText = document.getElementById("tytulText").value;
+      var dateFrom = document.getElementById("rokOdDate").value;
+      var dateTo = document.getElementById("rokDoDate").value;
+      var castText = document.getElementById("obsadaText").value;
+
+      if (titleText != "") {
+      this.films = _.filter(this.films, function(e) {
+        return e.title.indexOf(titleText) != -1;
+      })
+      }
+
+      if (dateFrom != "") {
+      this.films = _.filter(this.films, function(e) {
+        return e.year >= dateFrom;
+      })
+      }
+
+      if (dateTo != "") {
+      this.films = _.filter(this.films, function(e) {
+        return e.year <= dateTo;
+      })
+      }
+
+      if (castText != "") {
+      this.films = _.filter(this.films, function(e) {
+        return e.cast.indexOf(castText) != -1;
+      })
+      }
+
+
+      this.$emit('getFilteredFilms', this.films)
     }
   }
+
   
 }
 
