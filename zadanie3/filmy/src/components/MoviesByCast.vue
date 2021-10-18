@@ -1,14 +1,16 @@
 <template>
-<div>
-  <h2>Filmy wg obsady:</h2>
-  <p v-for="c in cast">
-    {{ c }}:
-    <p class='blue' v-for="m in moviesWithCast">
-        <span v-if="m.cast.includes(c)">
-            - {{ m.title }}
-        </span>
-    </p>
-  </p>
+  <div>
+    <h1>Filmy wg obsady:</h1>
+    <ol v-for="c in cast">
+      {{
+        c
+      }}:
+      <span class="blue" v-for="m in moviesWithCast">
+        <li v-if="m.cast.includes(c)">
+          {{ m.title }}
+        </li>
+      </span>
+    </ol>
   </div>
 </template>
 

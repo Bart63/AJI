@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>Movie Table</h2>
     <table class="table">
       <thead>
         <tr>
@@ -24,7 +23,12 @@
       </tbody>
     </table>
     <div>
-      <button id="kolejneButton" type="button" @click="showNextMovies">
+      <button
+        id="kolejneButton"
+        type="button"
+        @click="showNextMovies"
+        class="btn btn-info col-sm-12"
+      >
         Pokaż kolejne 10
       </button>
     </div>

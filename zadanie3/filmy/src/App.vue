@@ -1,8 +1,13 @@
 <template>
-  <search-form :movies="this.movies" @getFilteredFilms="getFilms"></search-form>
-  <movie-table :movies="this.filteredMovies"></movie-table>
-  <movies-by-genre :movies="moviesForGenre" />
-  <movies-by-cast :movies="moviesForCast" />
+  <div class="container">
+    <search-form
+      :movies="this.movies"
+      @getFilteredFilms="getFilms"
+    ></search-form>
+    <movie-table :movies="this.filteredMovies" />
+    <movies-by-genre :movies="moviesForGenre" />
+    <movies-by-cast :movies="moviesForCast" />
+  </div>
 </template>
 
 <script>
@@ -41,4 +46,7 @@ export default {
 </script>
 
 <style>
+li {
+  margin-left: 3vw;
+}
 </style>

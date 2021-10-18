@@ -1,86 +1,121 @@
 <template>
-  <div>
-      <h2>Search Form</h2>
-      <div>
-          <text>Tytuł:</text>
-          <input id="tytulText" type="text" placeholder="Tytuł lub fragment tytułu"/>
-      </div>
-      <div>
-          <text>Rok produkcji od:</text>
-          <input id="rokOdDate" type="number" min="1900" max="2019" step="1" value="" />
-      </div>
-      <div>
-          <text>Rok produkcji do:</text>
-          <input id="rokDoDate" type="number" min="1900" max="2019" step="1" value="" />
-      </div>
-      <div>
-          <text>Obsada:</text>
-          <input id="obsadaText" type="text" placeholder="Imię i nazwisko"/>
-      </div>
-      <button id="szukajButton" type="button" @click="filter">Szukaj</button>
+  <h1>Baza filmów</h1>
+  <form v-on:submit.prevent="onSubmit">
+    <div class="form-group">
+      <label for="inputTitle">Tytuł</label>
+      <input
+        id="inputTitle"
+        class="form-control"
+        type="text"
+        placeholder="Tytuł lub fragment tytułu"
+      />
     </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="inputProductionFrom"
+        >Rok produkcji od:</label
+      >
+      <div class="col-sm-8">
+        <input
+          id="inputProductionFrom"
+          class="form-control"
+          type="number"
+          min="1900"
+          max="2019"
+          step="1"
+          value=""
+          placeholder="Liczba naturalna z przedziału 1900-2019"
+        />
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="inputProductionTo"
+        >Rok produkcji do:</label
+      >
+      <div class="col-sm-8">
+        <input
+          id="inputProductionTo"
+          class="form-control"
+          type="number"
+          min="1900"
+          max="2019"
+          step="1"
+          value=""
+          placeholder="Liczba naturalna z przedziału 1900-2019"
+        />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="inputCast">Obsada</label>
+      <input
+        id="inputCast"
+        type="text"
+        class="form-control"
+        placeholder="Imię i nazwisko"
+      />
+    </div>
+    <div class="form-group row">
+      <input
+        type="button"
+        class="btn btn-info col-sm-12"
+        @click="filter"
+        value="Szukaj"
+      />
+    </div>
+  </form>
 </template>
 
 <script>
 export default {
   name: "SearchForm",
 
- props: {
-   movies: Object
- },
+  props: {
+    movies: Object,
+  },
   data() {
     return {
       films: [],
-      
     };
   },
   created() {
     this.films = this.movies;
-    
   },
   methods: {
-    filter: function()
-    {
-
+    filter: function () {
       this.films = this.movies;
 
-      var titleText = document.getElementById("tytulText").value;
-      var dateFrom = document.getElementById("rokOdDate").value;
-      var dateTo = document.getElementById("rokDoDate").value;
-      var castText = document.getElementById("obsadaText").value;
+      var titleText = document.getElementById("inputTitle").value;
+      var dateFrom = document.getElementById("inputProductionFrom").value;
+      var dateTo = document.getElementById("inputProductionTo").value;
+      var castText = document.getElementById("inputCast").value;
 
       if (titleText != "") {
-      this.films = _.filter(this.films, function(e) {
-        return e.title.indexOf(titleText) != -1;
-      })
+        this.films = _.filter(this.films, function (e) {
+          return e.title.indexOf(titleText) != -1;
+        });
       }
 
       if (dateFrom != "") {
-      this.films = _.filter(this.films, function(e) {
-        return e.year >= dateFrom;
-      })
+        this.films = _.filter(this.films, function (e) {
+          return e.year >= dateFrom;
+        });
       }
 
       if (dateTo != "") {
-      this.films = _.filter(this.films, function(e) {
-        return e.year <= dateTo;
-      })
+        this.films = _.filter(this.films, function (e) {
+          return e.year <= dateTo;
+        });
       }
 
       if (castText != "") {
-      this.films = _.filter(this.films, function(e) {
-        return e.cast.indexOf(castText) != -1;
-      })
+        this.films = _.filter(this.films, function (e) {
+          return _.join(e.cast, " ").indexOf(castText) != -1;
+        });
       }
 
-
-      this.$emit('getFilteredFilms', this.films)
-    }
-  }
-
-  
-}
-
+      this.$emit("getFilteredFilms", this.films);
+    },
+  },
+};
 </script>
 
 <style scoped>

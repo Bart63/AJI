@@ -1,14 +1,16 @@
 <template>
-<div>
-  <h2>Filmy wg gatunku:</h2>
-  <p v-for="gen in genres">
-    {{ gen }}:
-    <p class='red' v-for="m in moviesWithGenre">
-        <span v-if="m.genres.includes(gen)">
-            - {{ m.title }}
-        </span>
-    </p>
-  </p>
+  <div>
+    <h1>Filmy wg gatunku:</h1>
+    <ol v-for="gen in genres">
+      {{
+        gen
+      }}:
+      <span class="red" v-for="m in moviesWithGenre">
+        <li v-if="m.genres.includes(gen)">
+          {{ m.title }}
+        </li>
+      </span>
+    </ol>
   </div>
 </template>
 
