@@ -1,6 +1,6 @@
 <template>
   <h1>Baza filmów</h1>
-  <form v-on:submit.prevent="onSubmit">
+  <form id="search-form">
     <div class="form-group">
       <label for="inputTitle">Tytuł</label>
       <input
@@ -55,9 +55,8 @@
     </div>
     <div class="form-group row">
       <input
-        type="button"
+        type="submit"
         class="btn btn-info col-sm-12"
-        @click="filter"
         value="Szukaj"
       />
     </div>
@@ -74,13 +73,19 @@ export default {
   data() {
     return {
       films: [],
+      searchForm: HTMLFormElement,
     };
   },
   created() {
     this.films = this.movies;
   },
+  mounted() {
+    this.searchForm = document.getElementById('search-form');
+    this.searchForm.addEventListener('submit', this.filter);
+    this.searchForm.submit
+  },
   methods: {
-    filter: function () {
+    filter: function (event) {
       this.films = this.movies;
 
       var titleText = document.getElementById("inputTitle").value;
@@ -113,6 +118,7 @@ export default {
       }
 
       this.$emit("getFilteredFilms", this.films);
+      event.preventDefault();
     },
   },
 };
