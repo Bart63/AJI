@@ -5,18 +5,27 @@ Vue.use(Vuex);
 
 import router from '../router';
 import * as ideasService from '../services/ideas'
-
+import * as productsService from '../services/products'
 
 export default new Vuex.Store({
     state: {
         form: {
             idea: ''
         },
+        productForm : {
+            productName: '',
+            category: '',
+            price: Number,
+            weight: ''
+        },
         ideas: []
     },
     mutations: {
         setForm(state, {key, value}) {
             state.form[key] = value;
+        },
+        setProductForm(state, {key, value}) {
+            state.productForm[key] = value;
         },
         setIdeas(state, ideas) {
             state.ideas = ideas;
@@ -33,6 +42,12 @@ export default new Vuex.Store({
             await ideasService.createIdea(context.state.form);
 
             router.push('/');
+        },
+        async createProduct(context) {
+
+            let r = await productsService.createProduct(context.state.productForm);
+            
+            return r;
         },
         async getIdeas(context) {
             const ideas = await ideasService.getIdeas();

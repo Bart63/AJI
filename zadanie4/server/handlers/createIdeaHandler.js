@@ -6,7 +6,9 @@ exports.createIdeaHandler = async(req, res) => {
     const collection = client
     .collection('ideas');
 
-    const result = await collection.insertOne({...req.body, votes: 0});
+    const result = await collection.insertOne({...req.body, votes: 0}, (err, result)=>{
+        res.status(200).send(result.ops)                
+      });
 
     res.send(result.ops);
 }
