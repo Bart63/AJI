@@ -17,6 +17,18 @@ exports.createProductHandler = async(req, res) => {
         res.status(400).send({ errors: 'Product name can not be empty', status: 400 });
     }
 
+    if (pCategory === "") {
+        res.status(400).send({ errors: 'Product category can not be empty', status: 400 });
+    }
+
+    if (pPrice === 0) {
+        res.status(400).send({ errors: 'Product price can not be empty', status: 400 });
+    }
+
+    if (pWeight === 0) {
+        res.status(400).send({ errors: 'Product weight can not be empty', status: 400 });
+    }
+
     try {
         await collection.insertOne({...req.body});
     }

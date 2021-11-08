@@ -6,6 +6,7 @@ Vue.use(Vuex);
 import router from '../router';
 import * as ideasService from '../services/ideas'
 import * as productsService from '../services/products'
+import * as categoriesService from '../services/categories'
 
 export default new Vuex.Store({
     state: {
@@ -16,9 +17,11 @@ export default new Vuex.Store({
             productName: '',
             category: '',
             price: Number,
-            weight: ''
+            weight: Number
         },
-        ideas: []
+        ideas: [],
+        categories: [],
+        
     },
     mutations: {
         setForm(state, {key, value}) {
@@ -29,6 +32,9 @@ export default new Vuex.Store({
         },
         setIdeas(state, ideas) {
             state.ideas = ideas;
+        },
+        setCategories(state, categories) {
+            state.categories = categories;
         },
         setIdea(state, updatedIdea) {
             Object.assign(
@@ -45,7 +51,7 @@ export default new Vuex.Store({
         },
         async createProduct(context) {
 
-            let r = await productsService.createProduct(context.state.productForm);
+            const r = await productsService.createProduct(context.state.productForm);
             
             return r;
         },
@@ -53,6 +59,11 @@ export default new Vuex.Store({
             const ideas = await ideasService.getIdeas();
                 
             context.commit('setIdeas', ideas);
+        },
+        async getCategories(context) {
+            const categories = await categoriesService.getCategories();
+                
+            context.commit('setCategories', categories);
         },
         async upVoteIdea(context, idea) {
             
