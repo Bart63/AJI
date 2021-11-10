@@ -62,7 +62,7 @@ export default {
         _setFormCategory (value) {
             
             this.setProductForm({ key: 'category',
-            value: value });
+            value: value._id });
         },
         _setFormPrice (value) {
             

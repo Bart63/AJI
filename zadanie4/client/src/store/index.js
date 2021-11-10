@@ -45,6 +45,7 @@ export default new Vuex.Store({
             state.ideas.find(idea => idea._id === updatedIdea._id),
             updatedIdea);
         }
+        
     },
     actions: {
         async createIdea(context) {
@@ -71,6 +72,7 @@ export default new Vuex.Store({
         },
         async getProducts(context) {
             const products = await productsService.getProducts();
+
                 
             context.commit('setProducts', products);
         },
