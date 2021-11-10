@@ -101,8 +101,8 @@ export default {
 
                 this._setFormName("");
                 this._setFormCategory("");
-                this._setFormPrice(0);
-                this._setFormWeight(0);
+                this._setFormPrice("");
+                this._setFormWeight("");
 
                 router.push('/');
             }

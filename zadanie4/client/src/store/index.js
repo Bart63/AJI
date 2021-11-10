@@ -16,10 +16,11 @@ export default new Vuex.Store({
         productForm : {
             productName: '',
             category: '',
-            price: Number,
-            weight: Number
+            price: '',
+            weight: ''
         },
         ideas: [],
+        products: [],
         categories: [],
         
     },
@@ -32,6 +33,9 @@ export default new Vuex.Store({
         },
         setIdeas(state, ideas) {
             state.ideas = ideas;
+        },
+        setProducts(state, products) {
+            state.products = products;
         },
         setCategories(state, categories) {
             state.categories = categories;
@@ -64,6 +68,11 @@ export default new Vuex.Store({
             const categories = await categoriesService.getCategories();
                 
             context.commit('setCategories', categories);
+        },
+        async getProducts(context) {
+            const products = await productsService.getProducts();
+                
+            context.commit('setProducts', products);
         },
         async upVoteIdea(context, idea) {
             

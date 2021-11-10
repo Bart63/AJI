@@ -21,13 +21,15 @@ exports.createProductHandler = async(req, res) => {
         res.status(400).send({ errors: 'Product category can not be empty', status: 400 });
     }
 
-    if (pPrice === 0) {
-        res.status(400).send({ errors: 'Product price can not be empty', status: 400 });
+    var re = new RegExp('^[0-9]+(\.[0-9]{1,2})?$');
+    if (!re.test(pPrice)) {
+        res.status(400).send({ errors: 'Product price is invalid', status: 400 });
     }
 
-    if (pWeight === 0) {
-        res.status(400).send({ errors: 'Product weight can not be empty', status: 400 });
+    if (!re.test(pWeight)) {
+        res.status(400).send({ errors: 'Product weight is invalid', status: 400 });
     }
+    
 
     try {
         await collection.insertOne({...req.body});

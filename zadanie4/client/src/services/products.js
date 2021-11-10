@@ -19,3 +19,11 @@ export const createProduct = async product => {
 
 }
 
+export const getProducts = async () => {
+    
+    const { data: products } = await axios.get(
+        `${getBasePath()}/products`);
+
+    return products;
+}
+
