@@ -1,26 +1,25 @@
 const { getClient }  = require ("../db");
 const mongoose = require("mongoose");
 
-/*
-const Category = require("../models/category");
-const Product = require("../models/product");
-*/
+
+const CategoryModel = require("../models/category");
+const ProductModel = require("../models/product");
+
 
 exports.getProductsHandler = async (req, res) => {
-    const client = await getClient();
-    const collection = client.collection('products');
+    
+    mongoose.connect('mongodb://localhost:27017/zad4DB');
 
-    const products = await collection.find({}).toArray();
-
-    /*
-    const collection2 = client.collection('categories');
-    const categories = await collection2.find({}).toArray();
-
-    Product.
-    Category.insertMany(categories);
-
-    Product.populate('category');
-    */
-
-    res.send(products);
+    ProductModel
+    .find()
+    .populate('category')
+    .exec()
+    .then(function (products) {
+        console.log(products);
+       
+        res.send(products);
+    })
+    .catch(function (err) {
+        res.send(err);
+    });
 }

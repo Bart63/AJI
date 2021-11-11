@@ -32,7 +32,7 @@ export default {
          return {
            headers: [
            { text: 'Product name', value: 'productName' },
-           { text: 'Category', value: 'category' },
+           { text: 'Category', value: 'category.categoryName' },
            { text: 'Price (PLN)', value: 'price' },
            { text: 'Weight (kg)', value: 'weight' }
                ],
