@@ -8,6 +8,23 @@ import * as ideasService from '../services/ideas'
 import * as productsService from '../services/products'
 import * as categoriesService from '../services/categories'
 
+const getDefaultState = () => {
+    return {
+        form: {
+            idea: ''
+        },
+        productForm : {
+            productName: '',
+            category: '',
+            price: '',
+            weight: ''
+        },
+        ideas: [],
+        products: [],
+        categories: [],
+        
+    }
+  }
 export default new Vuex.Store({
     state: {
         form: {
@@ -15,6 +32,7 @@ export default new Vuex.Store({
         },
         productForm : {
             productName: '',
+            description: '',
             category: '',
             price: '',
             weight: ''
@@ -44,6 +62,14 @@ export default new Vuex.Store({
             Object.assign(
             state.ideas.find(idea => idea._id === updatedIdea._id),
             updatedIdea);
+        },
+        setProduct(state, updatedProduct) {
+            Object.assign(
+            state.products.find(product => product._id === updatedProduct._id),
+            updatedProduct);
+        },
+        resetState(state) {
+            Object.assign(state, getDefaultState())
         }
         
     },
@@ -86,7 +112,23 @@ export default new Vuex.Store({
             
             
             context.commit('setIdea', updatedIdea);
+        },
+        async updateProduct(context, product) {
+            const r = await productsService.updateProduct(product);
+
+            if (r.status === 200)
+            {
+                context.commit('setProduct', product);
+            }
+
+            return r;
+        },
+        async resetState(context) {
+            context.commit('resetState');
         }
+
     },
-    modules: {}
+    modules: {},
+    
+  
 });

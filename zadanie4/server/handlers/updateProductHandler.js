@@ -1,16 +1,16 @@
-const { getClient } = require("../db");
 const ObjectId = require('mongodb').ObjectId;
 const mongoose = require("mongoose");
 
 
 const ProductModel = require("../models/product");
 
-exports.createProductHandler = async(req, res) => {
+exports.updateProductHandler = async(req, res) => {
     
     mongoose.connect('mongodb://localhost:27017/zad4DB');
 
     res.set('Content-Type', 'application/json')
 
+    const id = req.body['_id'];
     const pName = req.body['productName'];
     const pDescription = req.body['description'];
     const pCategory = req.body['category'];
@@ -41,13 +41,16 @@ exports.createProductHandler = async(req, res) => {
     const newProduct = new ProductModel({
         _id: new ObjectId,
         productName: pName,
-        description: pDescription,
-        category: mongoose.Types.ObjectId(pCategory),
+        category: pCategory,
         price: pPrice,
         weight: pWeight})
 
-    newProduct
-    .save()
+        console.log(newProduct);
+
+    ProductModel
+    .findOneAndUpdate({_id: id}, {$set: {productName: newProduct.productName,
+         category: newProduct.category, description: newProduct.description, price: newProduct.price,
+        weight: newProduct.weight}})
     .then(function (product) {
         console.log(product);
         

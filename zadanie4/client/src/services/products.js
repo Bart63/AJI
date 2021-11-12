@@ -19,6 +19,21 @@ export const createProduct = async product => {
 
 }
 
+export const updateProduct = async product => {
+    
+    return await axios.put(
+        `${getBasePath()}/products/${product._id}`, product)
+        .then(function(response) {
+            
+            return response.data;
+        })
+        .catch(function(error) {
+            
+            return error.response.data;   
+          });
+
+}
+
 export const getProducts = async () => {
     
     const { data: products } = await axios.get(

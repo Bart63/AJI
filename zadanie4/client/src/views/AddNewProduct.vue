@@ -11,6 +11,15 @@
                 no-resize
                 rows="1"
             ></v-textarea>
+            <v-textarea
+                outlined
+                @change="_setFormDescription"
+                name="input5"
+                label="Product description"
+                background-color="#f5ffa8"
+                no-resize
+                rows="5"
+            ></v-textarea>
             <v-select
                 :items="categories"
                 item-text="categoryName"
@@ -57,6 +66,11 @@ export default {
         _setFormName (value) {
             
             this.setProductForm({ key: 'productName',
+            value: value });
+        },
+        _setFormDescription (value) {
+            
+            this.setProductForm({ key: 'description',
             value: value });
         },
         _setFormCategory (value) {
