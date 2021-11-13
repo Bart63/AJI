@@ -18,6 +18,12 @@
         <template v-slot:item.options="props">
           <v-btn @click="_addProductToCart(props.item)" color="teal lighten-2" class="white--text">Add to cart</v-btn>
         </template>
+        <template v-slot:item.price="props">
+          <div>{{ props.item.price.toFixed(2) }}</div>
+        </template>
+        <template v-slot:item.weight="props">
+          <div>{{ props.item.weight.toFixed(2) }}</div>
+        </template>
         </v-data-table>
     </div>
 </template>
@@ -33,8 +39,17 @@ export default {
     methods: {
         ...mapActions(["getProducts", "getCategories", "addProductToOrder"]),
         ...mapMutations(["addProductToOrder"]),
+
         _addProductToCart(value) {
+
             this.addProductToOrder(value);
+
+            this.$notify({
+                    group: 'Successes',
+                    title: 'Success',
+                    text: 'Product: ' + value.productName + ' successfully added to the cart', 
+                    type: 'success'
+                });
         }
         
         

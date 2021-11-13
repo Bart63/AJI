@@ -7,6 +7,8 @@ Vue.use(Vuex);
 import * as productsService from '../services/products'
 import * as categoriesService from '../services/categories'
 
+var money = require("money-math");
+
 const getDefaultState = () => {
     return {
 
@@ -18,11 +20,8 @@ const getDefaultState = () => {
                 email: '',
                 phoneNumber: '',
             },
-            products: [ {
-                product: {},
-                quantity: '',
-                totalPrice: ''
-            } ]
+            products: [],
+            totalOrderPrice: 0
         }
     }
   }
@@ -37,11 +36,8 @@ export default new Vuex.Store({
                 email: '',
                 phoneNumber: '',
             },
-            products: [ {
-                product: {},
-                quantity: '',
-                totalPrice: ''
-            } ]
+            products: [],
+            totalOrderPrice: 0
         }
 
     },
@@ -64,33 +60,23 @@ export default new Vuex.Store({
         },
         addProductToOrder(state, product) {
 
-            
             const newProduct = {
                 product: product,
                 quantity: 1,
                 totalPrice: product.price * 1
             }
             
-            if (state.order.products[0].quantity === '')
-            {
-                
-                Object.assign(
-                    state.order.products[0],
-                    newProduct);
-            }
-            else 
-            {
-                state.order.products.push(newProduct);
-            }
+            state.order.products.push(newProduct);
             
-            
+            const sum = money.add(state.order.totalOrderPrice.toString(), newProduct.totalPrice.toString());
+            state.order.totalOrderPrice = sum;
         },
         removeProductFromOrder(state, productID) {
             const i = state.order.products.map(item => item.product._id).indexOf(productID);
             state.order.products.splice(i, 1);
         },
         setOrderUserData(state, username, email, phoneNumber) {
-            userData = {
+            const userData = {
                 username: username,
                 email: email,
                 phoneNumber: phoneNumber,
@@ -100,19 +86,25 @@ export default new Vuex.Store({
                 state.order.userData,
                 userData);
         },
-        setProductInOrder(state, productId, quantity) {
+        setProductQuantityInOrder(state, data) {
 
-            const product = state.order.products.find(product => product._id === productId);
+            const product = state.order.products.find(item => item.product._id === data.productId);
 
-            newProduct = {
-                product: product,
-                quantity: quantity,
-                totalPrice: product.price * quantity
+            const newProduct = {
+                product: product.product,
+                quantity: data.newQuantity,
+                totalPrice: product.product.price * data.newQuantity
             };
 
             Object.assign(
-                state.order.products.find(product => product._id === productID),
+                state.order.products.find(item => item.product._id === data.productId),
                 newProduct);
+
+            let sum = 0;
+
+            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice.toString()));
+
+            state.order.totalOrderPrice = sum;
         },
         setOrderForm(state, {key, value}) {
             state.order.userData[key] = value;

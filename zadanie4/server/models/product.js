@@ -6,8 +6,8 @@ const productsSchema = Schema({
   productName: String,
   description: String,
   category: { type: Schema.Types.ObjectId, ref: 'Categories' },
-  price: String,
-  weight: String
+  price: Number,
+  weight: Number
 });
 
 

@@ -113,10 +113,6 @@ export default {
                     type: 'success'
                 });
 
-                this._setFormName("");
-                this._setFormCategory("");
-                this._setFormPrice("");
-                this._setFormWeight("");
 
                 router.push('/');
             }

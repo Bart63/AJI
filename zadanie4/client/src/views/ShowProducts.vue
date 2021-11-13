@@ -94,7 +94,7 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.price }}</div>
+            <div>{{ props.item.price.toFixed(2) }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
                 Update price
@@ -118,7 +118,7 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.weight }}</div>
+            <div>{{ props.item.weight.toFixed(2) }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
                 Update weight
