@@ -27,7 +27,7 @@ exports.updateProductHandler = async(req, res) => {
         return;
     }
 
-    var re = new RegExp('^[0-9]+\.[0-9]{2}$');
+    var re = new RegExp('^[0-9]+\,[0-9]{2}$');
     if (!re.test(pPrice)) {
         res.status(400).send({ errors: 'Product price is invalid', status: 400 });
         return;
