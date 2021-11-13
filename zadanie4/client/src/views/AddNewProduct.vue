@@ -1,12 +1,12 @@
 <template>
     <div class="add_product">
-        <h1>Add new product</h1>
+        <h1>Dodaj nowy produkt</h1>
         <form @submit='submitProduct'>
             <v-textarea
                 outlined
                 @change="_setFormName"
                 name="input1"
-                label="Product name"
+                label="Nazwa produktu"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
@@ -15,7 +15,7 @@
                 outlined
                 @change="_setFormDescription"
                 name="input5"
-                label="Product description"
+                label="Opis"
                 background-color="#f5ffa8"
                 no-resize
                 rows="5"
@@ -24,7 +24,7 @@
                 :items="categories"
                 item-text="categoryName"
                 item-value="_id"
-                label="Select category"
+                label="Wybierz kategorię"
                 persistent-hint
                 return-object
                 single-line
@@ -34,7 +34,7 @@
                 outlined
                 @change="_setFormPrice"
                 name="input3"
-                label="Price (PLN)"
+                label="Cena (PLN)"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
@@ -43,13 +43,13 @@
                 outlined
                 @change="_setFormWeight"
                 name="input4"
-                label="Weight (kg)"
+                label="Waga (kg)"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
             ></v-textarea>
             <br />
-            <v-btn type='submit' color="lime darken-4" class="white--text">Submit</v-btn>
+            <v-btn type='Zapisz' color="lime darken-4" class="white--text">Submit</v-btn>
         </form>
     </div>
 </template>
@@ -99,7 +99,7 @@ export default {
 
                 this.$notify({
                     group: 'Errors',
-                    title: 'Error',
+                    title: 'Błąd',
                     text: result.errors, 
                     type: 'error'
                 });
@@ -109,7 +109,7 @@ export default {
                 this.$notify({
                     group: 'Successes',
                     title: 'Success',
-                    text: 'Product successfully added', 
+                    text: 'Produkt pomyślnie dodany', 
                     type: 'success'
                 });
 

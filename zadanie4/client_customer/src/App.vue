@@ -16,6 +16,7 @@
     </v-main>
     <notifications group="Errors" position="bottom right" classes="notificationStyle" />
     <notifications group="Successes" position="bottom right" classes="notificationStyle" />
+    <notifications group="Warnings" position="bottom right" classes="notificationStyle" />
   </v-app>
 </template>
 
@@ -43,7 +44,7 @@ export default {
   
   border-radius:20px;
 
-  &.warn {
+  &.warning {
     background: #ffb648;
     border-left-color: #f48a06;
   }

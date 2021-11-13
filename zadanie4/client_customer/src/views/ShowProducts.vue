@@ -1,10 +1,10 @@
 <template>
     <div class="add_product">
-     <v-btn @click="$router.push('/show-products/order')" color="teal lighten-1" class="white--text">Finalize order</v-btn>
+     <v-btn @click="$router.push('/show-products/order')" color="teal lighten-1" class="white--text">Przejdź do koszyka</v-btn>
         <h1>Products list</h1>
         <v-text-field
             v-model="search"
-            label="Search"
+            label="Szukaj"
             single-line
             hide-details>
             </v-text-field>
@@ -16,13 +16,13 @@
             class="elevation-1">
 
         <template v-slot:item.options="props">
-          <v-btn @click="_addProductToCart(props.item)" color="teal lighten-2" class="white--text">Add to cart</v-btn>
+          <v-btn @click="_addProductToCart(props.item)" color="teal lighten-2" class="white--text">Dodaj do koszyka</v-btn>
         </template>
         <template v-slot:item.price="props">
-          <div>{{ props.item.price.toFixed(2) }}</div>
+          <div>{{ props.item.price }}</div>
         </template>
         <template v-slot:item.weight="props">
-          <div>{{ props.item.weight.toFixed(2) }}</div>
+          <div>{{ props.item.weight }}</div>
         </template>
         </v-data-table>
     </div>
@@ -46,8 +46,8 @@ export default {
 
             this.$notify({
                     group: 'Successes',
-                    title: 'Success',
-                    text: 'Product: ' + value.productName + ' successfully added to the cart', 
+                    title: 'Sukces',
+                    text: 'Produkt: ' + value.productName + ' dodany do koszyka', 
                     type: 'success'
                 });
         }
@@ -66,12 +66,12 @@ export default {
     data() {
          return {
            headers: [
-           { text: 'Product name', value: 'productName' },
-           { text: 'Description', value: 'description' },
-           { text: 'Category', value: 'category.categoryName' },
-           { text: 'Price (PLN)', value: 'price' },
-           { text: 'Weight (kg)', value: 'weight' },
-           { text: 'Options', value: 'options', sortable: false }
+           { text: 'Nazwa produktu', value: 'productName' },
+           { text: 'Opis', value: 'description' },
+           { text: 'Kategoria', value: 'category.categoryName' },
+           { text: 'Cena (PLN)', value: 'price' },
+           { text: 'Waga (kg)', value: 'weight' },
+           { text: 'Opcje', value: 'options', sortable: false }
                ],
             search: ''
           }

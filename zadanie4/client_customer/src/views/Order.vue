@@ -1,6 +1,6 @@
 <template>
     <div class="add_product">
-        <h1>Order:</h1>
+        <h1>Twój koszyk:</h1>
         <v-data-table
             :headers="this.headers"
             :items="this.order.products"
@@ -8,7 +8,20 @@
             class="elevation-1">  
 
         <template v-slot:item.totalPrice="props">
-          <div>{{ props.item.totalPrice.toFixed(2) }}</div>
+          <div>{{ props.item.totalPrice }}</div>
+        </template>
+        <template v-slot:item.options="props">
+          <v-btn
+            class="mx-2"
+            fab
+            dark
+            small
+            color="red"@click="_removeProduct(props.item)">
+            
+            <v-icon dark>
+            mdi-delete
+            </v-icon>
+        </v-btn>
         </template>
         <template v-slot:item.quantity="props">
 
@@ -56,7 +69,7 @@
 
         <v-text-field
               v-model="this.order.totalOrderPrice"
-              label="Total cost"
+              label="Wartość (PLN)"
               filled
               readonly
         ></v-text-field>
@@ -66,7 +79,7 @@
                 outlined
                 @change="_setOrderFormUsername"
                 name="input1"
-                label="Username"
+                label="Nazwa użytkownika"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
@@ -84,13 +97,13 @@
                 outlined
                 @change="_setOrderPNumber"
                 name="input3"
-                label="Phone number"
+                label="Nr telefonu"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
             ></v-textarea>
             <br />
-            <v-btn type='submit' color="lime darken-4" class="white--text">Submit</v-btn>
+            <v-btn type='submit' color="lime darken-4" class="white--text">Złóż zamówienie</v-btn>
         </form>
     </div>
 </template>
@@ -105,7 +118,7 @@ import Vue from 'vue'
 export default {
     methods: {
         //...mapActions([]),
-        ...mapMutations(["setOrderForm", "setProductQuantityInOrder"]),
+        ...mapMutations(["setOrderForm", "setProductQuantityInOrder", "removeProductFromOrder"]),
         _submitOrder() {
             
         },
@@ -141,6 +154,16 @@ export default {
 
 
             this.setProductQuantityInOrder({ productId: value.product._id, newQuantity: value.quantity });
+        },
+        _removeProduct(value) {
+            this.removeProductFromOrder(value.product._id);
+
+            this.$notify({
+                    group: 'Warnings',
+                    title: 'Uwaga!',
+                    text: 'Produkt: ' + value.product.productName + ' usunięty z koszyka', 
+                    type: 'warning'
+                });
         }
 
     },
@@ -154,9 +177,10 @@ export default {
     data() {
          return {
            headers: [
-           { text: 'Product name', value: 'product.productName' },
-           { text: 'Quantity', value: 'quantity' },
-           { text: 'Total price (PLN)', value: 'totalPrice' } ]
+           { text: 'Nazwa produktu', value: 'product.productName' },
+           { text: 'Ilość', value: 'quantity' },
+           { text: 'Całkowita cena (PLN)', value: 'totalPrice' },
+           { text: 'Opcje', value: 'options' } ]
           }
          }
        

@@ -1,7 +1,7 @@
 <template>
   <div>
   
-     <v-btn @click="$router.push('/show-products')" color="teal lighten-3" class="white--text">Show products</v-btn>
+     <v-btn @click="$router.push('/show-products')" color="teal lighten-3" class="white--text">Przeglądaj produkty</v-btn>
 
   </div>
 </template>

@@ -16,8 +16,8 @@ const getDefaultState = () => {
         productForm : {
             productName: '',
             category: '',
-            price: Number,
-            weight: Number
+            price: '',
+            weight: ''
         },
         ideas: [],
         products: [],
@@ -34,8 +34,8 @@ export default new Vuex.Store({
             productName: '',
             description: '',
             category: '',
-            price: Number,
-            weight: Number
+            price: '',
+            weight: ''
         },
         ideas: [],
         products: [],

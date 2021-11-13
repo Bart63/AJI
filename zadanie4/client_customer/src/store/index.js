@@ -21,7 +21,7 @@ const getDefaultState = () => {
                 phoneNumber: '',
             },
             products: [],
-            totalOrderPrice: 0
+            totalOrderPrice: ''
         }
     }
   }
@@ -37,7 +37,7 @@ export default new Vuex.Store({
                 phoneNumber: '',
             },
             products: [],
-            totalOrderPrice: 0
+            totalOrderPrice: '0'
         }
 
     },
@@ -63,17 +63,23 @@ export default new Vuex.Store({
             const newProduct = {
                 product: product,
                 quantity: 1,
-                totalPrice: product.price * 1
+                totalPrice: product.price
             }
             
             state.order.products.push(newProduct);
             
-            const sum = money.add(state.order.totalOrderPrice.toString(), newProduct.totalPrice.toString());
+            const sum = money.add(state.order.totalOrderPrice, newProduct.totalPrice);
             state.order.totalOrderPrice = sum;
         },
         removeProductFromOrder(state, productID) {
             const i = state.order.products.map(item => item.product._id).indexOf(productID);
             state.order.products.splice(i, 1);
+
+            let sum = 0;
+
+            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice));
+
+            state.order.totalOrderPrice = sum.toString();
         },
         setOrderUserData(state, username, email, phoneNumber) {
             const userData = {
@@ -90,10 +96,12 @@ export default new Vuex.Store({
 
             const product = state.order.products.find(item => item.product._id === data.productId);
 
+            let totalCost = money.mul(data.newQuantity.toString()+".00", product.product.price.toString());
+
             const newProduct = {
                 product: product.product,
                 quantity: data.newQuantity,
-                totalPrice: product.product.price * data.newQuantity
+                totalPrice: totalCost
             };
 
             Object.assign(
@@ -102,7 +110,7 @@ export default new Vuex.Store({
 
             let sum = 0;
 
-            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice.toString()));
+            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice));
 
             state.order.totalOrderPrice = sum;
         },

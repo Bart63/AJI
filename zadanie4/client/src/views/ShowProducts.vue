@@ -1,9 +1,9 @@
 <template>
     <div class="add_product">
-        <h1>Products list</h1>
+        <h1>Produkty</h1>
         <v-text-field
             v-model="search"
-            label="Search"
+            label="Szukaj"
             single-line
             hide-details>
             </v-text-field>
@@ -26,7 +26,7 @@
             <div>{{ props.item.productName }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
-                Update name
+                Zmień nazwę
               </div>
               <v-text-field
                 v-model="props.item.productName"
@@ -50,7 +50,7 @@
             <div>{{ props.item.description }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
-                Update description
+                Zmień opis
               </div>
               <v-text-field
                 v-model="props.item.description"
@@ -74,7 +74,7 @@
             <div>{{ props.item.category.categoryName }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
-                Update name
+                Zmień kategorię
               </div>
                <v-select
                 v-model="props.item.category"
@@ -94,10 +94,10 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.price.toFixed(2) }}</div>
+            <div>{{ props.item.price }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
-                Update price
+                Zmień cenę
               </div>
               <v-text-field
                 v-model="props.item.price"
@@ -118,10 +118,10 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.weight.toFixed(2) }}</div>
+            <div>{{ props.item.weight }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
-                Update weight
+                Zmień wagę
               </div>
               <v-text-field
                 v-model="props.item.weight"
@@ -193,11 +193,11 @@ export default {
     data() {
          return {
            headers: [
-           { text: 'Product name', value: 'productName' },
-           { text: 'Description', value: 'description' },
-           { text: 'Category', value: 'category.categoryName' },
-           { text: 'Price (PLN)', value: 'price' },
-           { text: 'Weight (kg)', value: 'weight' }
+           { text: 'Nazwa produktu', value: 'productName' },
+           { text: 'Opis', value: 'description' },
+           { text: 'Kategoria', value: 'category.categoryName' },
+           { text: 'Cena (PLN)', value: 'price' },
+           { text: 'Waga (kg)', value: 'weight' }
                ],
             search: ''
           }
