@@ -6,6 +6,7 @@ Vue.use(Vuex);
 //import router from '../router';
 import * as productsService from '../services/products'
 import * as categoriesService from '../services/categories'
+import * as ordersService from '../services/orders'
 
 var money = require("money-math");
 
@@ -81,17 +82,7 @@ export default new Vuex.Store({
 
             state.order.totalOrderPrice = sum.toString();
         },
-        setOrderUserData(state, username, email, phoneNumber) {
-            const userData = {
-                username: username,
-                email: email,
-                phoneNumber: phoneNumber,
-            };
-
-            Object.assign(
-                state.order.userData,
-                userData);
-        },
+        
         setProductQuantityInOrder(state, data) {
 
             const product = state.order.products.find(item => item.product._id === data.productId);
@@ -136,12 +127,40 @@ export default new Vuex.Store({
         async resetState(context) {
             context.commit('resetState');
         },
-        
+        async submitOrder(context) {
+
+            var orderToSend = {
+                userData: {
+                    username: context.state.order.userData.username,
+                    email: context.state.order.userData.email,
+                    phoneNumber: context.state.order.userData.phoneNumber,
+                },
+                products: [],
+                totalOrderPrice: context.state.order.totalOrderPrice
+            }
+
+            context.state.order.products.forEach(product => {
+                
+                const newProduct = {
+                    productId: product.product._id,
+                    quantity: product.quantity,
+                    totalPrice: product.price
+                }
+
+                orderToSend.products.push(newProduct);
+
+            });
+
+            const r = await ordersService.createOrder(orderToSend);
+
+            return r;
+        }
         
 
 
     },
     modules: {},
+
     
   
 });

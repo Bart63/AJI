@@ -1,7 +1,7 @@
 <template>
     <div class="add_product">
      <v-btn @click="$router.push('/show-products/order')" color="teal lighten-1" class="white--text">Przejdź do koszyka</v-btn>
-        <h1>Products list</h1>
+        <h1>Produkty</h1>
         <v-text-field
             v-model="search"
             label="Szukaj"

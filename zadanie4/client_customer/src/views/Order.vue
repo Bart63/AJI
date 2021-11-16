@@ -77,30 +77,30 @@
         <form @submit='_submitOrder'>
             <v-textarea
                 outlined
-                @change="_setOrderFormUsername"
                 name="input1"
                 label="Nazwa użytkownika"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
+                @change="_setOrderFormUsername"
             ></v-textarea>
             <v-textarea
                 outlined
-                @change="_setOrderFormEmail"
                 name="input5"
                 label="Email"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
+                @change="_setOrderFormEmail"
             ></v-textarea>
             <v-textarea
                 outlined
-                @change="_setOrderPNumber"
                 name="input3"
                 label="Nr telefonu"
                 background-color="#f5ffa8"
                 no-resize
                 rows="1"
+                @change="_setOrderPNumber"
             ></v-textarea>
             <br />
             <v-btn type='submit' color="lime darken-4" class="white--text">Złóż zamówienie</v-btn>
@@ -113,14 +113,91 @@ import { mapActions, mapState, mapGetters, mapMutations } from 'vuex';
 import Vue from 'vue'
     import {
       Vuetify,VApp,VForm, VTextField,VSelect
-    } from 'vuetify'
+    } from 'vuetify';
+import router from '../router';
 
 export default {
     methods: {
-        //...mapActions([]),
+        ...mapActions(["submitOrder", "resetState"]),
         ...mapMutations(["setOrderForm", "setProductQuantityInOrder", "removeProductFromOrder"]),
-        _submitOrder() {
-            
+        async _submitOrder() {
+
+            event.preventDefault();
+
+            if (this.order.products.length === 0) {
+
+                this.$notify({
+                    group: 'Errors',
+                    title: 'Błąd',
+                    text: 'Koszyk jest pusty', 
+                    type: 'error'
+                });
+
+                return;
+            }
+
+            if (this.order.userData.username == '') {
+                this.$notify({
+                    group: 'Errors',
+                    title: 'Błąd',
+                    text: 'Nazwa użytkownika jest nieprawidłowa', 
+                    type: 'error'
+                });
+
+                return;
+            }
+
+            const emailRe = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+            if (!emailRe.test(this.order.userData.email)) {
+                this.$notify({
+                    group: 'Errors',
+                    title: 'Błąd',
+                    text: 'Adres email jest nieprawidłowy', 
+                    type: 'error'
+                });
+
+                return;
+            }
+
+            var phoneNumberRe = /^\d{9}$/;
+
+            if (!phoneNumberRe.test(this.order.userData.phoneNumber)) {
+                this.$notify({
+                    group: 'Errors',
+                    title: 'Błąd',
+                    text: 'Numer telefonu jest nieprawidłowy', 
+                    type: 'error'
+                });
+
+                return;
+            }
+
+            const r = await this.submitOrder();
+
+
+            if (r.status === 200) {
+
+                this.$notify({
+                    group: 'Successes',
+                    title: 'Sukces',
+                    text: 'Pomyślnie złożono zamówienie!', 
+                    type: 'success'
+                });
+
+                this.resetState();
+
+                router.push('/show-products');
+            }
+
+            if (r.status === 400) {
+                this.$notify({
+                    group: 'Errors',
+                    title: 'Błąd',
+                    text: 'Błąd: ' + r.errors, 
+                    type: 'error'
+                });
+            }
         },
         _setOrderFormUsername(value) {
             this.setOrderForm({ key: 'username',
@@ -171,16 +248,15 @@ export default {
         ...mapState(["order"]),
         
     },
-    created() {
 
-    },
     data() {
          return {
            headers: [
            { text: 'Nazwa produktu', value: 'product.productName' },
            { text: 'Ilość', value: 'quantity' },
            { text: 'Całkowita cena (PLN)', value: 'totalPrice' },
-           { text: 'Opcje', value: 'options' } ]
+           { text: 'Opcje', value: 'options' } ],
+       
           }
          }
        
