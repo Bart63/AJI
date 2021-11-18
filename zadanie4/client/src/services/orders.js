@@ -1,13 +1,11 @@
 import axios from 'axios';
-
 const getBasePath = () => {
     return 'http://localhost:5000';
 }
-
-export const getCategories = async () => {
+export const getOrdersWithStatus = async statusId => {
     
     return await axios.get(
-        `${getBasePath()}/categories`)
+        `${getBasePath()}/orders/status/${statusId}`)
         .then(function(response) {
             
             return response.data;

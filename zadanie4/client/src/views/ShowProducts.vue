@@ -1,5 +1,5 @@
 <template>
-    <div class="add_product">
+    <div class="show_products">
         <h1>Produkty</h1>
         <v-text-field
             v-model="search"
@@ -13,6 +13,7 @@
             :items-per-page="15"
             :search="search"
             class="elevation-1">
+
 
         <template v-slot:item.productName="props">
           <v-edit-dialog
@@ -54,8 +55,6 @@
               </div>
               <v-text-field
                 v-model="props.item.description"
-                label="Edit"
-                single-line
                 counter
                 autofocus
               ></v-text-field>
@@ -94,7 +93,7 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.price }}</div>
+            <div>{{ props.item.price.toFixed(2) }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
                 Zmień cenę
@@ -118,7 +117,7 @@
             @cancel="cancel"
             @close="close"
           >
-            <div>{{ props.item.weight }}</div>
+            <div>{{ props.item.weight.toFixed(2) }}</div>
             <template v-slot:input>
               <div class="mt-4 text-h5">
                 Zmień wagę
@@ -139,10 +138,7 @@
 
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex';
-import Vue from 'vue'
-    import {
-      Vuetify,VApp,VForm, VTextField,VSelect,VCheckbox,VNavigationDrawer,VFooter,VList,VBtn,VIcon,VGrid,VToolbar,VCard,transitions
-    } from 'vuetify'
+
 
 export default {
     methods: {

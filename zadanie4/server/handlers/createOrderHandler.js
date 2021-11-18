@@ -20,7 +20,8 @@ exports.createOrderHandler = async(req, res) => {
         _id: new ObjectId,
         userData: userData,
         products: products,
-        totalOrderPrice: totalOrderPrice
+        totalOrderPrice: totalOrderPrice,
+        approvalDate: Date.now()
         })
 
     newProduct

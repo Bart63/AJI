@@ -22,7 +22,7 @@ const getDefaultState = () => {
                 phoneNumber: '',
             },
             products: [],
-            totalOrderPrice: ''
+            totalOrderPrice: '0'
         }
     }
   }
@@ -69,7 +69,7 @@ export default new Vuex.Store({
             
             state.order.products.push(newProduct);
             
-            const sum = money.add(state.order.totalOrderPrice, newProduct.totalPrice);
+            const sum = money.add(state.order.totalOrderPrice, newProduct.totalPrice.toString());
             state.order.totalOrderPrice = sum;
         },
         removeProductFromOrder(state, productID) {
@@ -101,7 +101,7 @@ export default new Vuex.Store({
 
             let sum = 0;
 
-            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice));
+            state.order.products.forEach(item => sum = money.add(sum.toString(), item.totalPrice.toString()));
 
             state.order.totalOrderPrice = sum;
         },
@@ -142,14 +142,16 @@ export default new Vuex.Store({
             context.state.order.products.forEach(product => {
                 
                 const newProduct = {
-                    productId: product.product._id,
+                    product: product.product._id,
                     quantity: product.quantity,
-                    totalPrice: product.price
+                    totalPrice: product.totalPrice
                 }
 
                 orderToSend.products.push(newProduct);
 
             });
+
+            console.log(orderToSend);
 
             const r = await ordersService.createOrder(orderToSend);
 

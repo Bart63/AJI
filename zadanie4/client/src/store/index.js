@@ -7,6 +7,8 @@ import router from '../router';
 import * as ideasService from '../services/ideas'
 import * as productsService from '../services/products'
 import * as categoriesService from '../services/categories'
+import * as ordersService from '../services/orders'
+import * as statesService from '../services/states'
 
 const getDefaultState = () => {
     return {
@@ -22,7 +24,8 @@ const getDefaultState = () => {
         ideas: [],
         products: [],
         categories: [],
-        
+        states: [],
+        orders: [],
     }
   }
 export default new Vuex.Store({
@@ -40,7 +43,8 @@ export default new Vuex.Store({
         ideas: [],
         products: [],
         categories: [],
-        
+        states: [],
+        orders: []
     },
     mutations: {
         setForm(state, {key, value}) {
@@ -70,7 +74,14 @@ export default new Vuex.Store({
         },
         resetState(state) {
             Object.assign(state, getDefaultState())
-        }
+        },
+        setOrders(state, orders) {
+            Object.assign(state.orders, orders)
+        },
+        setStates(state, states) {
+            Object.assign(state.states, states)
+        },
+        
         
     },
     actions: {
@@ -125,8 +136,22 @@ export default new Vuex.Store({
         },
         async resetState(context) {
             context.commit('resetState');
-        }
+        },
+        async getOrdersWithStatus(context, statusName) {
 
+            const statusId = await context.state.states.find(item => (item.stateName === statusName))._id;
+            
+            const r = await ordersService.getOrdersWithStatus(statusId);
+
+            context.commit("setOrders", r);
+
+        },
+        async getStates(context) {
+            const r = await statesService.getOrdersStates();
+
+            context.commit("setStates", r);
+        }
+        
     },
     modules: {},
     
