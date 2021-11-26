@@ -41,7 +41,7 @@ export default new Vuex.Store({
             weight: ''
         },
         ideas: [],
-        products: [],
+        products: [ {} ],
         categories: [],
         states: [],
         orders: []
@@ -139,6 +139,7 @@ export default new Vuex.Store({
         },
         async getOrdersWithStatus(context, statusName) {
 
+            
             const statusId = await context.state.states.find(item => (item.stateName === statusName))._id;
             
             const r = await ordersService.getOrdersWithStatus(statusId);

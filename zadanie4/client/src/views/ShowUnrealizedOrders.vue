@@ -10,23 +10,35 @@
         <v-data-table
             :headers="this.mainHeaders"
             :items="this.orders"
-            :items-per-page="15"
             :search="search"
             class="elevation-5">
 
         <template v-slot:item.approvalDate="props">
             <div>{{ props.item.approvalDate }}</div>
         </template>
+        
         <template v-slot:item.totalOrderPrice="props">
-        <v-chip
-
-          dark
-        >
-            {{ props.item.totalOrderPrice }}
-             </v-chip>
+            <v-chip
+                dark>
+                {{ props.item.totalOrderPrice }}
+            </v-chip>
         </template>
 
-        
+        <template v-slot:item.products="props">
+
+            <div v-for="product in props.item.products">
+                <v-chip
+                    >
+                    {{ product.product.productName}} 
+                </v-chip>
+                <v-chip
+                    class="ma-1"
+                    color="primary">
+                    Ilość: {{ product.quantity}} 
+                </v-chip>
+            </div>
+        </template>
+
         </v-data-table>
     </div>
 </template>
@@ -42,6 +54,20 @@ export default {
     computed: {
         ...mapState(["orders", "states"]),
     },
+
+    data() {
+         return {
+           mainHeaders: [
+           { text: 'Data zatwierdzenia', value: 'approvalDate' },
+           { text: 'Wartość (PLN)', value: 'totalOrderPrice' },
+           { text: 'Produkty', value: 'products' },
+           { text: 'Status', value: 'status.stateName'}],
+            search: '',
+            ordersToShow: [
+                { approvalDate: "2021-12-14", totalOrderPrice: 145, products: [], c: { test: "test", test2: "cos" } }
+            ]
+          }
+         },
     async created() {
 
         await this.getStates();
@@ -49,25 +75,8 @@ export default {
 
         await this.getOrdersWithStatus("ZATWIERDZONE");
 
-        console.log(this.ordersToShow[0].totalOrderPrice);
-    },
-    data() {
-         return {
-           mainHeaders: [
-           { text: 'Data zatwierdzenia', value: 'approvalDate' },
-           { text: 'Wartość (PLN)', value: 'totalOrderPrice' },
-           { text: 'Produkty', value: 'products' },
-               ],
-            productHeaders: [
-           { text: 'Nazwa', value: 'product.productName' },
-           { text: 'Ilość', value: 'quantity' },
-               ],
-            search: '',
-            ordersToShow: [
-                { approvalDate: "2021-12-14", totalOrderPrice: 145, products: [] }
-            ]
-          }
-         },
-     
+        console.log(this.orders);
+    }
+    
 }
 </script>
