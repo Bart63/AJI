@@ -14,27 +14,19 @@
             :search="search"
             class="elevation-5">
 
-        <template v-slot:[`item.approvalDate`]="{props}">
+        <template v-slot:item.approvalDate="props">
             <div>{{ props.item.approvalDate }}</div>
         </template>
-        <template v-slot:[`item.totalOrderPrice`]="{props}">
+        <template v-slot:item.totalOrderPrice="props">
         <v-chip
-          :color="green"
+
           dark
         >
             {{ props.item.totalOrderPrice }}
              </v-chip>
         </template>
 
-        <template v-slot:[`item.products`]="{props}">
-          <v-data-table
-            :headers="this.productHeaders"
-            :items="props"
-            :items-per-page="15"
-            :search="search"
-            class="elevation-5">
-            </v-data-table>
-        </template>
+        
         </v-data-table>
     </div>
 </template>
@@ -57,7 +49,7 @@ export default {
 
         await this.getOrdersWithStatus("ZATWIERDZONE");
 
-        console.log(this.orders);
+        console.log(this.ordersToShow[0].totalOrderPrice);
     },
     data() {
          return {
@@ -70,7 +62,10 @@ export default {
            { text: 'Nazwa', value: 'product.productName' },
            { text: 'Ilość', value: 'quantity' },
                ],
-            search: ''
+            search: '',
+            ordersToShow: [
+                { approvalDate: "2021-12-14", totalOrderPrice: 145, products: [] }
+            ]
           }
          },
      
