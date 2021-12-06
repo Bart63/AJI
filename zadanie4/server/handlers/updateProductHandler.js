@@ -20,6 +20,11 @@ exports.updateProductHandler = async (req, res) => {
         return;
     }
 
+    if (pDescription === "") {
+        res.status(400).send({ errors: 'Product description can not be empty', status: 400 });
+        return;
+    }
+
     if (pCategory === "") {
         res.status(400).send({ errors: 'Product category can not be empty', status: 400 });
         return;
@@ -40,6 +45,7 @@ exports.updateProductHandler = async (req, res) => {
         _id: new ObjectId,
         productName: pName,
         category: pCategory,
+        description: pDescription,
         price: pPrice,
         weight: pWeight
     })

@@ -31,13 +31,9 @@ export default {
   name: "Home",
   created() {
     this.resetState();
-    this.getIdeas();
   },
   methods: {
-    ...mapActions(["getIdeas", "upVoteIdea", "downVoteIdea", "resetState"]),
-  },
-  computed: {
-    ...mapState(["ideas"]),
+    ...mapActions(["resetState"]),
   },
 };
 </script>
