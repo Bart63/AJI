@@ -135,7 +135,7 @@ export default {
         this.$notify({
           group: "Successes",
           title: "Success",
-          text: "Product successfully updated",
+          text: "Produkt pomyślnie zaktualizowany",
           type: "success",
         });
       }
@@ -143,7 +143,7 @@ export default {
         this.$notify({
           group: "Errors",
           title: "Error",
-          text: "Unable to update\n" + r.errors,
+          text: "Nie można zaktualizować:\n" + r.errors,
           type: "error",
         });
       }

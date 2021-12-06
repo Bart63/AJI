@@ -13,3 +13,14 @@ export const getOrdersWithStatus = async statusId => {
         return error.response.data;
     });
 }
+
+export const updateOrder = async order => {
+    return await axios.put(
+        `${getBasePath()}/orders/${order._id}`, order)
+        .then(function (response) {
+            return response.data;
+        })
+        .catch(function (error) {
+            return error.response.data;
+        });
+}

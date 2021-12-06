@@ -19,6 +19,30 @@
         </v-chip>
       </template>
 
+      <template v-slot:item.status.stateName="props">
+          <v-edit-dialog
+          :return-value.sync="props.item.status"
+          large
+          persistent
+          @save="save(props.item)"
+          @cancel="cancel"
+          @close="close"
+        >
+        <div>{{ props.item.status.stateName }}</div>
+          <template v-slot:input>
+            <div class="mt-4 text-h5">Zmień status zamówienia</div>
+            <v-select
+              v-model="props.item.status"
+              :items="states"
+              item-text="stateName"
+              item-value="_id"
+            >
+            </v-select>
+          </template>
+        </v-edit-dialog>
+      </template>
+      
+
       <template v-slot:item.products="props">
         <div v-for="product in props.item.products">
           <v-chip>
@@ -38,7 +62,32 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   methods: {
-    ...mapActions(["getOrdersWithStatus", "getStates"]),
+    ...mapActions(["getOrdersWithStatus", "getStates", "updateOrder"]),
+
+    async save(value) {
+      console.log(value);
+
+      const r = await this.updateOrder(value);
+      if (r.status === 200) {
+        this.$notify({
+          group: "Successes",
+          title: "Success",
+          text: "Zamówienie pomyślnie zaktualizowane",
+          type: "success",
+        });
+      }
+      if (r.status === 400) {
+        this.$notify({
+          group: "Errors",
+          title: "Błąd",
+          text: "Nie można zaktualizować:\n" + r.errors,
+          type: "error",
+        });
+      }
+      this.getOrdersWithStatus("ZATWIERDZONE");
+    },
+    cancel() {},
+    close() {},
   },
   computed: {
     ...mapState(["orders", "states"]),

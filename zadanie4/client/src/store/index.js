@@ -53,6 +53,11 @@ export default new Vuex.Store({
                 state.products.find(product => product._id === updatedProduct._id),
                 updatedProduct);
         },
+        setOrder(state, updatedOrder) {
+            Object.assign(
+                state.orders.find(order => order._id === updatedOrder._id),
+                updatedOrder);
+        },
         resetState(state) {
             Object.assign(state, getDefaultState())
         },
@@ -84,6 +89,15 @@ export default new Vuex.Store({
 
             if (r.status === 200) {
                 context.commit('setProduct', product);
+            }
+            return r;
+        },
+        async updateOrder(context, order)
+        {
+            const r = await ordersService.updateOrder(order);
+
+            if (r.status === 200) {
+                context.commit('setOrder', order);
             }
             return r;
         },
