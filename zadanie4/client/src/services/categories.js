@@ -5,15 +5,15 @@ const getBasePath = () => {
 }
 
 export const getCategories = async () => {
-    
+
     return await axios.get(
         `${getBasePath()}/categories`)
-        .then(function(response) {
-            
+        .then(function (response) {
+
             return response.data;
-        }).catch(function(error) {
-            
-            return error.response.data;   
-          });
-        
+        }).catch(function (error) {
+
+            return error.response.data;
+        });
+
 }

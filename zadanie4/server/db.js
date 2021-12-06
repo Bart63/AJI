@@ -5,11 +5,10 @@ const dbName = 'zad4DB';
 
 let db = null;
 
-exports.getClient = async () => { 
+exports.getClient = async () => {
     return new Promise((resolve, reject) => {
-        if (!db)
-        {
-            MongoClient.connect(url, function(err, client) {
+        if (!db) {
+            MongoClient.connect(url, function (err, client) {
                 assert.equal(null, err);
                 console.log('Connected');
                 db = client.db(dbName);
@@ -18,13 +17,9 @@ exports.getClient = async () => {
         } else {
             resolve(db);
         }
-    });  
+    });
 };
 
 exports.close = () => {
     client.close();
 };
-
-
-
-

@@ -26,7 +26,6 @@ export const upVoteIdea = async ideaId => {
 }
 
 export const downVoteIdea = async ideaId => {
-    
     const { data: updatedIdea } = await axios.delete(
         `${getBasePath()}/ideas/${ideaId}/votes`);
 

@@ -1,4 +1,4 @@
-const { getClient }  = require ("../db");
+const { getClient } = require("../db");
 const ObjectId = require('mongodb').ObjectId;
 
 exports.getIdeasHandler = async (req, res) => {

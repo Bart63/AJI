@@ -5,10 +5,8 @@ const mongoose = require("mongoose");
 
 const ProductModel = require("../models/product");
 
-exports.createProductHandler = async(req, res) => {
-    
+exports.createProductHandler = async (req, res) => {
     mongoose.connect('mongodb://localhost:27017/zad4DB');
-
     res.set('Content-Type', 'application/json')
 
     const pName = req.body['productName'];
@@ -37,24 +35,24 @@ exports.createProductHandler = async(req, res) => {
         res.status(400).send({ errors: 'Product weight is invalid', status: 400 });
         return;
     }
-    
+
     const newProduct = new ProductModel({
         _id: new ObjectId,
         productName: pName,
         description: pDescription,
         category: mongoose.Types.ObjectId(pCategory),
         price: pPrice,
-        weight: pWeight})
+        weight: pWeight
+    })
 
     newProduct
-    .save()
-    .then(function (product) {
-        console.log(product);
-        
-        res.status(200).send( { response: 'OK', status: 200 } );
-    })
-    .catch(function (err) {
-        res.status(400).send({ errors: 'Unable to save product' + err, status: 400 });;
-    });
+        .save()
+        .then(function (product) {
+            console.log(product);
 
+            res.status(200).send({ response: 'OK', status: 200 });
+        })
+        .catch(function (err) {
+            res.status(400).send({ errors: 'Unable to save product' + err, status: 400 });;
+        });
 }

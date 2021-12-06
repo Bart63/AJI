@@ -43,7 +43,6 @@ export default {
   computed: {
     ...mapState(["orders", "states"]),
   },
-
   data() {
     return {
       mainHeaders: [
@@ -55,7 +54,6 @@ export default {
       search: "",
     };
   },
-  
   async created() {
     await this.getStates();
     await this.getOrdersWithStatus("ZATWIERDZONE");

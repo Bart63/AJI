@@ -10,5 +10,4 @@ const productsSchema = Schema({
   weight: { type: Number, min: 0 }
 });
 
-
 module.exports = mongoose.model('Products', productsSchema, 'products');

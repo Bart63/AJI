@@ -6,5 +6,4 @@ const statesSchema = Schema({
   stateName: String
 });
 
-
 module.exports = mongoose.model('States', statesSchema, 'states');

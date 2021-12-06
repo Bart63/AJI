@@ -1,7 +1,7 @@
 const { getClient } = require("../db");
 const ObjectId = require('mongodb').ObjectId;
 
-exports.downVoteIdeaHandler = async(req, res) => {
+exports.downVoteIdeaHandler = async (req, res) => {
     const { ideaId } = req.params;
     const client = await getClient();
     const collection = client.collection('ideas');
