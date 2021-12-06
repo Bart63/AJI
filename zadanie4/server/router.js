@@ -7,12 +7,14 @@ exports.router = (app) => {
     const { getOrdersWithStateHandler } = require('./handlers/getOrdersWithStateHandler');
     const { getOrdersStatesHandler } = require('./handlers/getOrdersStatesHandler');
     const { updateOrderStateHandler } = require('./handlers/updateOrderStateHandler');
+    const { getOrdersHandler } = require('./handlers/getOrdersHandler');
 
     app.post('/products', createProductHandler);
     app.get('/categories', getCategoriesHandler);
     app.get('/products', getProductsHandler);
     app.get('/status', getOrdersStatesHandler);
     app.get('/orders/status/:stateId', getOrdersWithStateHandler);
+    app.get('/orders', getOrdersHandler);
     app.post(`/orders`, createOrderHandler);
     app.put('/products/:_id', updateProductHandler);
     app.put('/orders/:_id', updateOrderStateHandler);

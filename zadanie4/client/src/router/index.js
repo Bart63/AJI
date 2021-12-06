@@ -24,6 +24,11 @@ const routes = [
         path: "/show-unrealized-orders",
         name: "show-unrealized-orders",
         component: () => import('../views/ShowUnrealizedOrders.vue')
+    },
+    {
+        path: "/show-orders",
+        name: "show-orders",
+        component: () => import('../views/ShowOrders.vue')
     }
 ];
 

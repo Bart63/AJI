@@ -110,6 +110,12 @@ export default new Vuex.Store({
 
             context.commit("setOrders", r);
         },
+        async getOrders(context) {
+            
+            const r = await ordersService.getOrders();
+
+            context.commit("setOrders", r);
+        },
         async getStates(context) {
             const r = await statesService.getOrdersStates();
             context.commit("setStates", r);

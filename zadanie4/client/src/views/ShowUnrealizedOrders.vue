@@ -83,7 +83,9 @@ export default {
           type: "error",
         });
       }
-      await this.getOrdersWithStatus("ZATWIERDZONE");
+      
+      this.$router.go()
+      
     },
     cancel() {},
     close() {},
@@ -106,6 +108,9 @@ export default {
     await this.getStates();
     await this.getOrdersWithStatus("ZATWIERDZONE");
     this.$set(this.orders, "orders", this.orders);
+    this.$set(this.states, "states", this.states);
   },
+ 
+  
 };
 </script>

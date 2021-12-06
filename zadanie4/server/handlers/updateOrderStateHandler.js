@@ -38,7 +38,7 @@ exports.updateOrderStateHandler = async (req, res) => {
         
     })
 
-    if (s.stateName == 'NIEZATWIERDZONE')
+    if (s.stateName == 'NIEZATWIERDZONE' || s.stateName == '')
     {
         
         res.status(400).send({ errors: 'Nie można zmienić statusu zamówienia', status: 400 });
