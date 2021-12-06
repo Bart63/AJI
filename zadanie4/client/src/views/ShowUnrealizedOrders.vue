@@ -65,8 +65,7 @@ export default {
     ...mapActions(["getOrdersWithStatus", "getStates", "updateOrder"]),
 
     async save(value) {
-      console.log(value);
-
+      
       const r = await this.updateOrder(value);
       if (r.status === 200) {
         this.$notify({
@@ -84,7 +83,7 @@ export default {
           type: "error",
         });
       }
-      this.getOrdersWithStatus("ZATWIERDZONE");
+      await this.getOrdersWithStatus("ZATWIERDZONE");
     },
     cancel() {},
     close() {},

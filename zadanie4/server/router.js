@@ -6,6 +6,7 @@ exports.router = (app) => {
     const { createOrderHandler } = require('./handlers/createOrderHandler');
     const { getOrdersWithStateHandler } = require('./handlers/getOrdersWithStateHandler');
     const { getOrdersStatesHandler } = require('./handlers/getOrdersStatesHandler');
+    const { updateOrderStateHandler } = require('./handlers/updateOrderStateHandler');
 
     app.post('/products', createProductHandler);
     app.get('/categories', getCategoriesHandler);
@@ -14,4 +15,5 @@ exports.router = (app) => {
     app.get('/orders/status/:stateId', getOrdersWithStateHandler);
     app.post(`/orders`, createOrderHandler);
     app.put('/products/:_id', updateProductHandler);
+    app.put('/orders/:_id', updateOrderStateHandler);
 }
