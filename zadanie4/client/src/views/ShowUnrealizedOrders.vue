@@ -1,5 +1,5 @@
 <template>
-  <div class="show_unr_products">
+  <div class="show_unr_products" v-if="renderComponent">
     <h1>Niezrealizowane zamówienia</h1>
     <v-text-field v-model="search" label="Szukaj" single-line hide-details>
     </v-text-field>
@@ -30,7 +30,8 @@
         >
         <div>{{ props.item.status.stateName }}</div>
           <template v-slot:input>
-            <div class="mt-4 text-h5">Zmień status zamówienia</div>
+            <div class="mt-4 text-h5" 
+              >Zmień status zamówienia</div>
             <v-select
               v-model="props.item.status"
               :items="states"
@@ -63,6 +64,13 @@ import { mapActions, mapState } from "vuex";
 export default {
   methods: {
     ...mapActions(["getOrdersWithStatus", "getStates", "updateOrder"]),
+    
+    async updateValues() {
+      await this.getStates();
+      await this.getOrdersWithStatus("ZATWIERDZONE");
+      this.$set(this.orders, "orders", this.orders);
+      this.$set(this.states, "states", this.states);
+    },
 
     async save(value) {
       
@@ -83,9 +91,12 @@ export default {
           type: "error",
         });
       }
-      
-      this.$router.go()
-      
+      await this.updateValues();
+      this.renderComponent = false;
+      this.$nextTick().then(() => {
+        this.renderComponent = true;
+      });
+        
     },
     cancel() {},
     close() {},
@@ -95,6 +106,7 @@ export default {
   },
   data() {
     return {
+      renderComponent: true,
       mainHeaders: [
         { text: "Data zatwierdzenia", value: "approvalDate" },
         { text: "Wartość (PLN)", value: "totalOrderPrice" },
@@ -105,10 +117,7 @@ export default {
     };
   },
   async created() {
-    await this.getStates();
-    await this.getOrdersWithStatus("ZATWIERDZONE");
-    this.$set(this.orders, "orders", this.orders);
-    this.$set(this.states, "states", this.states);
+      this.updateValues();
   },
  
   
