@@ -8,7 +8,7 @@ const { router } = require('./router');
 app.use(bodyParser.json());
 
 app.use(cors({
-    
+    origin: ['http://localhost:8080', 'http://localhost:8081']
 }));
 
 
